@@ -16,11 +16,16 @@ library(ggplot2)
 library(plotly)
 library(esquisse)
 
-streamHistory <- fromJSON("StreamingHistory0.json", flatten = TRUE)
-streamHistory <- fromJSON("StreamingHistory1.json", flatten = TRUE)
-streamHistory <- fromJSON("StreamingHistory2.json", flatten = TRUE)
-streamHistory <- fromJSON("StreamingHistory3.json", flatten = TRUE)
-streamHistory <- fromJSON("StreamingHistory4.json", flatten = TRUE)
+# Gus history
+streamHistoryGus <- fromJSON("GusStreamingHistory0.json", flatten = TRUE)
+streamHistoryGus <- fromJSON("GusStreamingHistory1.json", flatten = TRUE)
+
+# Jeremy history
+streamHistoryJeremy <- fromJSON("JeremyStreamingHistory0 copy.json", flatten = TRUE)
+streamHistoryJeremy <- fromJSON("JeremyStreamingHistory1 copy.json", flatten = TRUE)
+streamHistoryJeremy <- fromJSON("JeremyStreamingHistory2 copy.json", flatten = TRUE)
+streamHistoryJeremy <- fromJSON("JeremyStreamingHistory3 copy.json", flatten = TRUE)
+streamHistoryJeremy <- fromJSON("JeremyStreamingHistory4 copy.json", flatten = TRUE)
 
 ```
 
