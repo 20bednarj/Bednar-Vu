@@ -219,16 +219,79 @@ pre code {
 <h3>Load Libraries &amp; Data</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShqc29ubGl0ZSlcbmxpYnJhcnkobHVicmlkYXRlKVxubGlicmFyeShnZ2hpZ2hsaWdodClcbmxpYnJhcnkoc3BvdGlmeXIpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkoa25pdHIpXG5saWJyYXJ5KGdncGxvdDIpXG5saWJyYXJ5KHBsb3RseSlcbmxpYnJhcnkoZXNxdWlzc2UpXG5cbiMgR3VzIGhpc3RvcnlcbnN0cmVhbUhpc3RvcnlHdXMgPC0gZnJvbUpTT04oXCJHdXNTdHJlYW1pbmdIaXN0b3J5MC5qc29uXCIsIGZsYXR0ZW4gPSBUUlVFKVxuc3RyZWFtSGlzdG9yeUd1cyA8LSBmcm9tSlNPTihcIkd1c1N0cmVhbWluZ0hpc3RvcnkxLmpzb25cIiwgZmxhdHRlbiA9IFRSVUUpXG5cbiMgSmVyZW15IGhpc3RvcnlcbnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oXCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5MCBjb3B5Lmpzb25cIiwgZmxhdHRlbiA9IFRSVUUpXG5zdHJlYW1IaXN0b3J5SmVyZW15IDwtIGZyb21KU09OKFwiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTEgY29weS5qc29uXCIsIGZsYXR0ZW4gPSBUUlVFKVxuc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTihcIkplcmVteVN0cmVhbWluZ0hpc3RvcnkyIGNvcHkuanNvblwiLCBmbGF0dGVuID0gVFJVRSlcbnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oXCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5MyBjb3B5Lmpzb25cIiwgZmxhdHRlbiA9IFRSVUUpXG5zdHJlYW1IaXN0b3J5SmVyZW15IDwtIGZyb21KU09OKFwiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTQgY29weS5qc29uXCIsIGZsYXR0ZW4gPSBUUlVFKVxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShqc29ubGl0ZSlcbmxpYnJhcnkobHVicmlkYXRlKVxuYGBgIn0= -->
 <pre class="r"><code>library(jsonlite)
-library(lubridate)
-library(gghighlight)
-library(spotifyr)
-library(tidyverse)
-library(knitr)
+library(lubridate)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYbHVicmlkYXRl4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0cyBhcmUgbWFza2VkIGZyb20g4oCYcGFja2FnZTpiYXNl4oCZOlxuXG4gICAgZGF0ZSwgaW50ZXJzZWN0LCBzZXRkaWZmLCB1bmlvblxuIn0= -->
+<pre><code>
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ2hpZ2hsaWdodClcbmBgYCJ9 -->
+<pre class="r"><code>library(gghighlight)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyByZXF1aXJlZCBwYWNrYWdlOiBnZ3Bsb3QyXG5OZWVkIGhlbHAgZ2V0dGluZyBzdGFydGVkPyBUcnkgdGhlIFIgR3JhcGhpY3MgQ29va2Jvb2s6XG5odHRwczovL3ItZ3JhcGhpY3Mub3JnXG4ifQ== -->
+<pre><code>Loading required package: ggplot2
+Need help getting started? Try the R Graphics Cookbook:
+https://r-graphics.org</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzcG90aWZ5cilcbmxpYnJhcnkodGlkeXZlcnNlKVxuYGBgIn0= -->
+<pre class="r"><code>library(spotifyr)
+library(tidyverse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxuLS0gQXR0YWNoaW5nIHBhY2thZ2VzIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSB0aWR5dmVyc2UgMS4zLjEgLS1cbnYgdGliYmxlICAzLjEuNCAgICAgdiBkcGx5ciAgIDEuMC43XG52IHRpZHlyICAgMS4xLjMgICAgIHYgc3RyaW5nciAxLjQuMFxudiByZWFkciAgIDIuMC4xICAgICB2IGZvcmNhdHMgMC41LjFcbnYgcHVycnIgICAwLjMuNCAgICAgXG4tLSBDb25mbGljdHMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHRpZHl2ZXJzZV9jb25mbGljdHMoKSAtLVxueCBsdWJyaWRhdGU6OmFzLmRpZmZ0aW1lKCkgbWFza3MgYmFzZTo6YXMuZGlmZnRpbWUoKVxueCBsdWJyaWRhdGU6OmRhdGUoKSAgICAgICAgbWFza3MgYmFzZTo6ZGF0ZSgpXG54IGRwbHlyOjpmaWx0ZXIoKSAgICAgICAgICBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbnggcHVycnI6OmZsYXR0ZW4oKSAgICAgICAgIG1hc2tzIGpzb25saXRlOjpmbGF0dGVuKClcbnggbHVicmlkYXRlOjppbnRlcnNlY3QoKSAgIG1hc2tzIGJhc2U6OmludGVyc2VjdCgpXG54IGRwbHlyOjpsYWcoKSAgICAgICAgICAgICBtYXNrcyBzdGF0czo6bGFnKClcbnggbHVicmlkYXRlOjpzZXRkaWZmKCkgICAgIG1hc2tzIGJhc2U6OnNldGRpZmYoKVxueCBsdWJyaWRhdGU6OnVuaW9uKCkgICAgICAgbWFza3MgYmFzZTo6dW5pb24oKVxuIn0= -->
+<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+-- Attaching packages ------------------------ tidyverse 1.3.1 --
+v tibble  3.1.4     v dplyr   1.0.7
+v tidyr   1.1.3     v stringr 1.4.0
+v readr   2.0.1     v forcats 0.5.1
+v purrr   0.3.4     
+-- Conflicts --------------------------- tidyverse_conflicts() --
+x lubridate::as.difftime() masks base::as.difftime()
+x lubridate::date()        masks base::date()
+x dplyr::filter()          masks stats::filter()
+x purrr::flatten()         masks jsonlite::flatten()
+x lubridate::intersect()   masks base::intersect()
+x dplyr::lag()             masks stats::lag()
+x lubridate::setdiff()     masks base::setdiff()
+x lubridate::union()       masks base::union()</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShrbml0cilcbmxpYnJhcnkoZ2dwbG90MilcbmxpYnJhcnkocGxvdGx5KVxuYGBgIn0= -->
+<pre class="r"><code>library(knitr)
 library(ggplot2)
-library(plotly)
-library(esquisse)
+library(plotly)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ2RhdGEudGFibGUnOlxuICBtZXRob2QgICAgICAgICAgIGZyb21cbiAgcHJpbnQuZGF0YS50YWJsZSAgICAgXG5SZWdpc3RlcmVkIFMzIG1ldGhvZCBvdmVyd3JpdHRlbiBieSAnaHRtbHdpZGdldHMnOlxuICBtZXRob2QgICAgICAgICAgIGZyb20gICAgICAgICBcbiAgcHJpbnQuaHRtbHdpZGdldCB0b29sczpyc3R1ZGlvXG5cbkF0dGFjaGluZyBwYWNrYWdlOiDigJhwbG90bHnigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTpnZ3Bsb3Qy4oCZOlxuXG4gICAgbGFzdF9wbG90XG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6c3RhdHPigJk6XG5cbiAgICBmaWx0ZXJcblxuVGhlIGZvbGxvd2luZyBvYmplY3QgaXMgbWFza2VkIGZyb20g4oCYcGFja2FnZTpncmFwaGljc+KAmTpcblxuICAgIGxheW91dFxuIn0= -->
+<pre><code>Registered S3 method overwritten by &#39;data.table&#39;:
+  method           from
+  print.data.table     
+Registered S3 method overwritten by &#39;htmlwidgets&#39;:
+  method           from         
+  print.htmlwidget tools:rstudio
+
+Attaching package: ‘plotly’
+
+The following object is masked from ‘package:ggplot2’:
+
+    last_plot
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following object is masked from ‘package:graphics’:
+
+    layout</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShlc3F1aXNzZSlcblxuIyBHdXMgaGlzdG9yeVxuc3RyZWFtSGlzdG9yeUd1cyA8LSBmcm9tSlNPTihcIkd1c1N0cmVhbWluZ0hpc3RvcnkwLmpzb25cIiwgZmxhdHRlbiA9IFRSVUUpXG5zdHJlYW1IaXN0b3J5R3VzIDwtIGZyb21KU09OKFwiR3VzU3RyZWFtaW5nSGlzdG9yeTEuanNvblwiLCBmbGF0dGVuID0gVFJVRSlcblxuIyBKZXJlbXkgaGlzdG9yeVxuc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTihcIkplcmVteVN0cmVhbWluZ0hpc3RvcnkwIGNvcHkuanNvblwiLCBmbGF0dGVuID0gVFJVRSlcbnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oXCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5MSBjb3B5Lmpzb25cIiwgZmxhdHRlbiA9IFRSVUUpXG5zdHJlYW1IaXN0b3J5SmVyZW15IDwtIGZyb21KU09OKFwiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTIgY29weS5qc29uXCIsIGZsYXR0ZW4gPSBUUlVFKVxuc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTihcIkplcmVteVN0cmVhbWluZ0hpc3RvcnkzIGNvcHkuanNvblwiLCBmbGF0dGVuID0gVFJVRSlcbnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oXCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5NCBjb3B5Lmpzb25cIiwgZmxhdHRlbiA9IFRSVUUpXG5cbmBgYCJ9 -->
+<pre class="r"><code>library(esquisse)
 
 # Gus history
 streamHistoryGus &lt;- fromJSON(&quot;GusStreamingHistory0.json&quot;, flatten = TRUE)
@@ -244,20 +307,29 @@ streamHistoryJeremy &lt;- fromJSON(&quot;JeremyStreamingHistory4 copy.json&quot;
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>###Wrangle Data and Join Tables</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyZWFtSGlzdG9yeUplcmVteVNvbmcgPC0gXG4gICAgc3RyZWFtSGlzdG9yeUplcmVteSAlPiVcbiAgICBncm91cF9ieSh0cmFja05hbWUpICU+JVxuICAgIHN1bW1hcml6ZShtc1RvdGFsID0gc3VtKG1zUGxheWVkKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyZWFtSGlzdG9yeUplcmVteVNvbmcgPC0gXG4gICAgc3RyZWFtSGlzdG9yeUplcmVteSAlPiVcbiAgICBncm91cF9ieSh0cmFja05hbWUpICU+JVxuICAgIHN1bW1hcml6ZShtc1RvdGFsID0gc3VtKG1zUGxheWVkKSkgJT4lXG4gICAgbXV0YXRlKExpc3RlbmVyID0gXCJKZXJlbXlcIilcblxuc3RyZWFtSGlzdG9yeUd1cyA8LSBcbiAgICBzdHJlYW1IaXN0b3J5R3VzICU+JVxuICAgIGdyb3VwX2J5KHRyYWNrTmFtZSkgJT4lXG4gICAgc3VtbWFyaXplKG1zVG90YWwgPSBzdW0obXNQbGF5ZWQpKSAlPiVcbiAgICBtdXRhdGUoTGlzdGVuZXIgPSBcIkd1c1wiKVxuXG5cblxuXG5gYGAifQ== -->
 <pre class="r"><code>streamHistoryJeremySong &lt;- 
     streamHistoryJeremy %&gt;%
     group_by(trackName) %&gt;%
-    summarize(msTotal = sum(msPlayed))</code></pre>
+    summarize(msTotal = sum(msPlayed)) %&gt;%
+    mutate(Listener = &quot;Jeremy&quot;)
+
+streamHistoryGus &lt;- 
+    streamHistoryGus %&gt;%
+    group_by(trackName) %&gt;%
+    summarize(msTotal = sum(msPlayed)) %&gt;%
+    mutate(Listener = &quot;Gus&quot;)
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdCIKZHVlIGRhdGU6ICIxMi8xNC8yMDIxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyMgTG9hZCBMaWJyYXJpZXMgJiBEYXRhCmBgYHtyfQpsaWJyYXJ5KGpzb25saXRlKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShnZ2hpZ2hsaWdodCkKbGlicmFyeShzcG90aWZ5cikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoa25pdHIpCmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeShwbG90bHkpCmxpYnJhcnkoZXNxdWlzc2UpCgojIEd1cyBoaXN0b3J5CnN0cmVhbUhpc3RvcnlHdXMgPC0gZnJvbUpTT04oIkd1c1N0cmVhbWluZ0hpc3RvcnkwLmpzb24iLCBmbGF0dGVuID0gVFJVRSkKc3RyZWFtSGlzdG9yeUd1cyA8LSBmcm9tSlNPTigiR3VzU3RyZWFtaW5nSGlzdG9yeTEuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQoKIyBKZXJlbXkgaGlzdG9yeQpzdHJlYW1IaXN0b3J5SmVyZW15IDwtIGZyb21KU09OKCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5MCBjb3B5Lmpzb24iLCBmbGF0dGVuID0gVFJVRSkKc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTigiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTEgY29weS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpCnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oIkplcmVteVN0cmVhbWluZ0hpc3RvcnkyIGNvcHkuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQpzdHJlYW1IaXN0b3J5SmVyZW15IDwtIGZyb21KU09OKCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5MyBjb3B5Lmpzb24iLCBmbGF0dGVuID0gVFJVRSkKc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTigiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTQgY29weS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpCgpgYGAKCmBgYHtyfQpzdHJlYW1IaXN0b3J5SmVyZW15U29uZyA8LSAKICAgIHN0cmVhbUhpc3RvcnlKZXJlbXkgJT4lCiAgICBncm91cF9ieSh0cmFja05hbWUpICU+JQogICAgc3VtbWFyaXplKG1zVG90YWwgPSBzdW0obXNQbGF5ZWQpKQpgYGAKCgoKCgo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkZpbmFsIFByb2plY3QiDQpkdWUgZGF0ZTogIjEyLzE0LzIwMjEiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIyMgTG9hZCBMaWJyYXJpZXMgJiBEYXRhDQpgYGB7cn0NCmxpYnJhcnkoanNvbmxpdGUpDQpsaWJyYXJ5KGx1YnJpZGF0ZSkNCmxpYnJhcnkoZ2doaWdobGlnaHQpDQpsaWJyYXJ5KHNwb3RpZnlyKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShnZ3Bsb3QyKQ0KbGlicmFyeShwbG90bHkpDQpsaWJyYXJ5KGVzcXVpc3NlKQ0KDQojIEd1cyBoaXN0b3J5DQpzdHJlYW1IaXN0b3J5R3VzIDwtIGZyb21KU09OKCJHdXNTdHJlYW1pbmdIaXN0b3J5MC5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQpzdHJlYW1IaXN0b3J5R3VzIDwtIGZyb21KU09OKCJHdXNTdHJlYW1pbmdIaXN0b3J5MS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQoNCiMgSmVyZW15IGhpc3RvcnkNCnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oIkplcmVteVN0cmVhbWluZ0hpc3RvcnkwIGNvcHkuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQ0Kc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTigiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTEgY29weS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQpzdHJlYW1IaXN0b3J5SmVyZW15IDwtIGZyb21KU09OKCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5MiBjb3B5Lmpzb24iLCBmbGF0dGVuID0gVFJVRSkNCnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oIkplcmVteVN0cmVhbWluZ0hpc3RvcnkzIGNvcHkuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQ0Kc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTigiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTQgY29weS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQoNCmBgYA0KDQoNCg0KIyMjV3JhbmdsZSBEYXRhIGFuZCBKb2luIFRhYmxlcw0KYGBge3J9DQpzdHJlYW1IaXN0b3J5SmVyZW15U29uZyA8LSANCiAgICBzdHJlYW1IaXN0b3J5SmVyZW15ICU+JQ0KICAgIGdyb3VwX2J5KHRyYWNrTmFtZSkgJT4lDQogICAgc3VtbWFyaXplKG1zVG90YWwgPSBzdW0obXNQbGF5ZWQpKSAlPiUNCiAgICBtdXRhdGUoTGlzdGVuZXIgPSAiSmVyZW15IikNCg0Kc3RyZWFtSGlzdG9yeUd1cyA8LSANCiAgICBzdHJlYW1IaXN0b3J5R3VzICU+JQ0KICAgIGdyb3VwX2J5KHRyYWNrTmFtZSkgJT4lDQogICAgc3VtbWFyaXplKG1zVG90YWwgPSBzdW0obXNQbGF5ZWQpKSAlPiUNCiAgICBtdXRhdGUoTGlzdGVuZXIgPSAiR3VzIikNCg0KDQoNCg0KYGBgDQoNCg0KDQoNCg0K</div>
 
 
 
