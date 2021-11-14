@@ -35,19 +35,23 @@ streamHistoryJeremy <- fromJSON("JeremyStreamingHistory4 copy.json", flatten = T
 ```{r}
 streamHistoryJeremySong <- 
     streamHistoryJeremy %>%
-    group_by(trackName) %>%
+    group_by(trackName, artistName) %>%
+    select(artistName, trackName, msPlayed) %>%
     summarize(msTotal = sum(msPlayed)) %>%
     mutate(Listener = "Jeremy")
 
 streamHistoryGusSong <- 
     streamHistoryGus %>%
-    group_by(trackName) %>%
+    group_by(trackName, artistName) %>%
+    select(artistName, trackName, msPlayed) %>%
     summarize(msTotal = sum(msPlayed)) %>%
     mutate(Listener = "Gus")
 
 streamHistoryGusAndJeremySong<-
   streamHistoryGusSong%>%
-  full_join(streamHistoryJeremySong)
+  full_join(streamHistoryJeremySong) %>%
+  filter(trackName != "Unknown Track") %>%
+  arrange(desc(msTotal))
 
 head(streamHistoryGusAndJeremySong)
 
