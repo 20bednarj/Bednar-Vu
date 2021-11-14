@@ -29,6 +29,12 @@ streamHistoryJeremy <- fromJSON("JeremyStreamingHistory4 copy.json", flatten = T
 
 ```
 
+```{r}
+streamHistoryJeremySong <- 
+    streamHistoryJeremy %>%
+    group_by(trackName) %>%
+    summarize(msTotal = sum(msPlayed))
+```
 
 
 
