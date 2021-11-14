@@ -39,14 +39,17 @@ streamHistoryJeremySong <-
     summarize(msTotal = sum(msPlayed)) %>%
     mutate(Listener = "Jeremy")
 
-streamHistoryGus <- 
+streamHistoryGusSong <- 
     streamHistoryGus %>%
     group_by(trackName) %>%
     summarize(msTotal = sum(msPlayed)) %>%
     mutate(Listener = "Gus")
 
+streamHistoryGusAndJeremySong<-
+  streamHistoryGusSong%>%
+  full_join(streamHistoryJeremySong)
 
-
+head(streamHistoryGusAndJeremySong)
 
 ```
 

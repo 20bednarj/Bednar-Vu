@@ -310,26 +310,45 @@ streamHistoryJeremy &lt;- fromJSON(&quot;JeremyStreamingHistory4 copy.json&quot;
 <p>###Wrangle Data and Join Tables</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyZWFtSGlzdG9yeUplcmVteVNvbmcgPC0gXG4gICAgc3RyZWFtSGlzdG9yeUplcmVteSAlPiVcbiAgICBncm91cF9ieSh0cmFja05hbWUpICU+JVxuICAgIHN1bW1hcml6ZShtc1RvdGFsID0gc3VtKG1zUGxheWVkKSkgJT4lXG4gICAgbXV0YXRlKExpc3RlbmVyID0gXCJKZXJlbXlcIilcblxuc3RyZWFtSGlzdG9yeUd1cyA8LSBcbiAgICBzdHJlYW1IaXN0b3J5R3VzICU+JVxuICAgIGdyb3VwX2J5KHRyYWNrTmFtZSkgJT4lXG4gICAgc3VtbWFyaXplKG1zVG90YWwgPSBzdW0obXNQbGF5ZWQpKSAlPiVcbiAgICBtdXRhdGUoTGlzdGVuZXIgPSBcIkd1c1wiKVxuXG5cblxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RyZWFtSGlzdG9yeUplcmVteVNvbmcgPC0gXG4gICAgc3RyZWFtSGlzdG9yeUplcmVteSAlPiVcbiAgICBncm91cF9ieSh0cmFja05hbWUpICU+JVxuICAgIHN1bW1hcml6ZShtc1RvdGFsID0gc3VtKG1zUGxheWVkKSkgJT4lXG4gICAgbXV0YXRlKExpc3RlbmVyID0gXCJKZXJlbXlcIilcblxuc3RyZWFtSGlzdG9yeUd1c1NvbmcgPC0gXG4gICAgc3RyZWFtSGlzdG9yeUd1cyAlPiVcbiAgICBncm91cF9ieSh0cmFja05hbWUpICU+JVxuICAgIHN1bW1hcml6ZShtc1RvdGFsID0gc3VtKG1zUGxheWVkKSkgJT4lXG4gICAgbXV0YXRlKExpc3RlbmVyID0gXCJHdXNcIilcblxuc3RyZWFtSGlzdG9yeUd1c0FuZEplcmVteVNvbmc8LVxuICBzdHJlYW1IaXN0b3J5R3VzU29uZyU+JVxuICBmdWxsX2pvaW4oc3RyZWFtSGlzdG9yeUplcmVteVNvbmcpXG5gYGAifQ== -->
 <pre class="r"><code>streamHistoryJeremySong &lt;- 
     streamHistoryJeremy %&gt;%
     group_by(trackName) %&gt;%
     summarize(msTotal = sum(msPlayed)) %&gt;%
     mutate(Listener = &quot;Jeremy&quot;)
 
-streamHistoryGus &lt;- 
+streamHistoryGusSong &lt;- 
     streamHistoryGus %&gt;%
     group_by(trackName) %&gt;%
     summarize(msTotal = sum(msPlayed)) %&gt;%
     mutate(Listener = &quot;Gus&quot;)
-</code></pre>
+
+streamHistoryGusAndJeremySong&lt;-
+  streamHistoryGusSong%&gt;%
+  full_join(streamHistoryJeremySong)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiSm9pbmluZywgYnkgPSBjKFwidHJhY2tOYW1lXCIsIFwibXNUb3RhbFwiLCBcIkxpc3RlbmVyXCIpXG4ifQ== -->
+<pre><code>Joining, by = c(&quot;trackName&quot;, &quot;msTotal&quot;, &quot;Listener&quot;)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChzdHJlYW1IaXN0b3J5R3VzQW5kSmVyZW15U29uZylcbmBgYCJ9 -->
+<pre class="r"><code>head(streamHistoryGusAndJeremySong)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6Mywic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI2IHggMyJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJwMVNUVXNETVJDZDNlMVd1K0FIZXZNVUVLMkNYYlRGcTZBVlJSQVJMZUkxN3FZMk5KMlVKR3YxcHIvTGYrYkJtbXl6b0hzMGg4M01tM2t6OHlaN2QvN1lTeDRUQUlpZ0VRUVF4ZGFFWnYvMnFIdmNCV2lFMWd1Z0FTMTN2OXFzelRJVllOMmwrY0JLZThBRkdjaUpWRXJPUExqdVFFR3VTRjhLUWFlYWVieTVmVVF1S0hwdmEvZXBVRWoyWnR5TXlBUEhqSkY3UTZlQzZYMmYwVTNUOUJSellpUVpqS1JtdHVLMWZHRUgxcU00MW1Rb2xhWHdiTXp4bVp3cVdXRHVtUnVIdlRZNWs0aWNrVjNTRjI4NWM4T1dnNGNmRFNqUHppZUVuNWNRbjdRWC9oOWgwV1doLzJ2KzNWMk1kTUswTHg5NXNHVVV6Y1kzTnVLQnBZa2VTRU9GZDVldnVUWU1tYW9WYTlrdHAxVkJweWQ4dDUvNWZQNVY3NW9KcXF1dUZaamsxTkIwcUZ4YmdPOGFaVWxPRFpkb1NhRjc2cmhHRGxRTldDdlFUWkozc2xHQjQwN1hOU2pEaTdQaTdlWXZPMXEwRE9lK1ZGejlHUXlmT1ZhN2lBVjlZdFVtVnEzaVVuQTZWUnhOcGNTaU9qVy9OcFprVWxSSXFRMitmd0NjWnpVZjRnSUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["trackName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["msTotal"],"name":[2],"type":["int"],"align":["right"]},{"label":["Listener"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"'Til Tomorrow","2":"164100","3":"Gus"},{"1":"'Till I Collapse","2":"0","3":"Gus"},{"1":"#1 Fan","2":"9659","3":"Gus"},{"1":"&burn (with Vince Staples)","2":"179015","3":"Gus"},{"1":"...And to Those I Love, Thanks for Sticking Around","2":"343591","3":"Gus"},{"1":"03' Bonnie & Clyde","2":"0","3":"Gus"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkZpbmFsIFByb2plY3QiDQpkdWUgZGF0ZTogIjEyLzE0LzIwMjEiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIyMgTG9hZCBMaWJyYXJpZXMgJiBEYXRhDQpgYGB7cn0NCmxpYnJhcnkoanNvbmxpdGUpDQpsaWJyYXJ5KGx1YnJpZGF0ZSkNCmxpYnJhcnkoZ2doaWdobGlnaHQpDQpsaWJyYXJ5KHNwb3RpZnlyKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShnZ3Bsb3QyKQ0KbGlicmFyeShwbG90bHkpDQpsaWJyYXJ5KGVzcXVpc3NlKQ0KDQojIEd1cyBoaXN0b3J5DQpzdHJlYW1IaXN0b3J5R3VzIDwtIGZyb21KU09OKCJHdXNTdHJlYW1pbmdIaXN0b3J5MC5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQpzdHJlYW1IaXN0b3J5R3VzIDwtIGZyb21KU09OKCJHdXNTdHJlYW1pbmdIaXN0b3J5MS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQoNCiMgSmVyZW15IGhpc3RvcnkNCnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oIkplcmVteVN0cmVhbWluZ0hpc3RvcnkwIGNvcHkuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQ0Kc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTigiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTEgY29weS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQpzdHJlYW1IaXN0b3J5SmVyZW15IDwtIGZyb21KU09OKCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5MiBjb3B5Lmpzb24iLCBmbGF0dGVuID0gVFJVRSkNCnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oIkplcmVteVN0cmVhbWluZ0hpc3RvcnkzIGNvcHkuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQ0Kc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTigiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTQgY29weS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQoNCmBgYA0KDQoNCg0KIyMjV3JhbmdsZSBEYXRhIGFuZCBKb2luIFRhYmxlcw0KYGBge3J9DQpzdHJlYW1IaXN0b3J5SmVyZW15U29uZyA8LSANCiAgICBzdHJlYW1IaXN0b3J5SmVyZW15ICU+JQ0KICAgIGdyb3VwX2J5KHRyYWNrTmFtZSkgJT4lDQogICAgc3VtbWFyaXplKG1zVG90YWwgPSBzdW0obXNQbGF5ZWQpKSAlPiUNCiAgICBtdXRhdGUoTGlzdGVuZXIgPSAiSmVyZW15IikNCg0Kc3RyZWFtSGlzdG9yeUd1cyA8LSANCiAgICBzdHJlYW1IaXN0b3J5R3VzICU+JQ0KICAgIGdyb3VwX2J5KHRyYWNrTmFtZSkgJT4lDQogICAgc3VtbWFyaXplKG1zVG90YWwgPSBzdW0obXNQbGF5ZWQpKSAlPiUNCiAgICBtdXRhdGUoTGlzdGVuZXIgPSAiR3VzIikNCg0KDQoNCg0KYGBgDQoNCg0KDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkZpbmFsIFByb2plY3QiDQpkdWUgZGF0ZTogIjEyLzE0LzIwMjEiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIyMgTG9hZCBMaWJyYXJpZXMgJiBEYXRhDQpgYGB7cn0NCmxpYnJhcnkoanNvbmxpdGUpDQpsaWJyYXJ5KGx1YnJpZGF0ZSkNCmxpYnJhcnkoZ2doaWdobGlnaHQpDQpsaWJyYXJ5KHNwb3RpZnlyKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShnZ3Bsb3QyKQ0KbGlicmFyeShwbG90bHkpDQpsaWJyYXJ5KGVzcXVpc3NlKQ0KDQojIEd1cyBoaXN0b3J5DQpzdHJlYW1IaXN0b3J5R3VzIDwtIGZyb21KU09OKCJHdXNTdHJlYW1pbmdIaXN0b3J5MC5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQpzdHJlYW1IaXN0b3J5R3VzIDwtIGZyb21KU09OKCJHdXNTdHJlYW1pbmdIaXN0b3J5MS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQoNCiMgSmVyZW15IGhpc3RvcnkNCnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oIkplcmVteVN0cmVhbWluZ0hpc3RvcnkwIGNvcHkuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQ0Kc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTigiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTEgY29weS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQpzdHJlYW1IaXN0b3J5SmVyZW15IDwtIGZyb21KU09OKCJKZXJlbXlTdHJlYW1pbmdIaXN0b3J5MiBjb3B5Lmpzb24iLCBmbGF0dGVuID0gVFJVRSkNCnN0cmVhbUhpc3RvcnlKZXJlbXkgPC0gZnJvbUpTT04oIkplcmVteVN0cmVhbWluZ0hpc3RvcnkzIGNvcHkuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQ0Kc3RyZWFtSGlzdG9yeUplcmVteSA8LSBmcm9tSlNPTigiSmVyZW15U3RyZWFtaW5nSGlzdG9yeTQgY29weS5qc29uIiwgZmxhdHRlbiA9IFRSVUUpDQoNCmBgYA0KDQoNCg0KIyMjV3JhbmdsZSBEYXRhIGFuZCBKb2luIFRhYmxlcw0KYGBge3J9DQpzdHJlYW1IaXN0b3J5SmVyZW15U29uZyA8LSANCiAgICBzdHJlYW1IaXN0b3J5SmVyZW15ICU+JQ0KICAgIGdyb3VwX2J5KHRyYWNrTmFtZSkgJT4lDQogICAgc3VtbWFyaXplKG1zVG90YWwgPSBzdW0obXNQbGF5ZWQpKSAlPiUNCiAgICBtdXRhdGUoTGlzdGVuZXIgPSAiSmVyZW15IikNCg0Kc3RyZWFtSGlzdG9yeUd1c1NvbmcgPC0gDQogICAgc3RyZWFtSGlzdG9yeUd1cyAlPiUNCiAgICBncm91cF9ieSh0cmFja05hbWUpICU+JQ0KICAgIHN1bW1hcml6ZShtc1RvdGFsID0gc3VtKG1zUGxheWVkKSkgJT4lDQogICAgbXV0YXRlKExpc3RlbmVyID0gIkd1cyIpDQoNCnN0cmVhbUhpc3RvcnlHdXNBbmRKZXJlbXlTb25nPC0NCiAgc3RyZWFtSGlzdG9yeUd1c1NvbmclPiUNCiAgZnVsbF9qb2luKHN0cmVhbUhpc3RvcnlKZXJlbXlTb25nKQ0KDQpoZWFkKHN0cmVhbUhpc3RvcnlHdXNBbmRKZXJlbXlTb25nKQ0KDQpgYGANCg0KDQoNCg0KDQo=</div>
 
 
 
