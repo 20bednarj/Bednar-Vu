@@ -31,7 +31,7 @@ streamHistoryJeremy <- fromJSON("JeremyStreamingHistory4 copy.json", flatten = T
 
 
 
-###Wrangle Data and Join Tables
+###Listening Length Per Usr By Song
 ```{r}
 streamHistoryJeremySong <- 
     streamHistoryJeremy %>%
@@ -47,6 +47,11 @@ streamHistoryGusSong <-
     summarize(msTotal = sum(msPlayed)) %>%
     mutate(Listener = "Gus")
 
+```
+
+
+###Gus and Jeremy Full Join
+```{r}
 streamHistoryGusAndJeremySong<-
   streamHistoryGusSong%>%
   full_join(streamHistoryJeremySong) %>%
@@ -54,10 +59,6 @@ streamHistoryGusAndJeremySong<-
   arrange(desc(msTotal))
 
 head(streamHistoryGusAndJeremySong)
-
 ```
-
-
-
 
 
