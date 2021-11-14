@@ -215,9 +215,32 @@ pre code {
 
 
 <!-- rnb-text-begin -->
+<div id="load-libraries-data" class="section level3">
+<h3>Load Libraries &amp; Data</h3>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShqc29ubGl0ZSlcbmxpYnJhcnkobHVicmlkYXRlKVxubGlicmFyeShnZ2hpZ2hsaWdodClcbmxpYnJhcnkoc3BvdGlmeXIpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcbmxpYnJhcnkoa25pdHIpXG5saWJyYXJ5KGdncGxvdDIpXG5saWJyYXJ5KHBsb3RseSlcbmxpYnJhcnkoZXNxdWlzc2UpXG5cbnN0cmVhbUhpc3RvcnkgPC0gZnJvbUpTT04oXCJTdHJlYW1pbmdIaXN0b3J5MC5qc29uXCIsIGZsYXR0ZW4gPSBUUlVFKVxuc3RyZWFtSGlzdG9yeSA8LSBmcm9tSlNPTihcIlN0cmVhbWluZ0hpc3RvcnkxLmpzb25cIiwgZmxhdHRlbiA9IFRSVUUpXG5zdHJlYW1IaXN0b3J5IDwtIGZyb21KU09OKFwiU3RyZWFtaW5nSGlzdG9yeTIuanNvblwiLCBmbGF0dGVuID0gVFJVRSlcbnN0cmVhbUhpc3RvcnkgPC0gZnJvbUpTT04oXCJTdHJlYW1pbmdIaXN0b3J5My5qc29uXCIsIGZsYXR0ZW4gPSBUUlVFKVxuc3RyZWFtSGlzdG9yeSA8LSBmcm9tSlNPTihcIlN0cmVhbWluZ0hpc3Rvcnk0Lmpzb25cIiwgZmxhdHRlbiA9IFRSVUUpXG5cbmBgYCJ9 -->
+<pre class="r"><code>library(jsonlite)
+library(lubridate)
+library(gghighlight)
+library(spotifyr)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+library(plotly)
+library(esquisse)
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdCIKZHVlIGRhdGU6ICIxMi8xNC8yMDIxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgo=</div>
+streamHistory &lt;- fromJSON(&quot;StreamingHistory0.json&quot;, flatten = TRUE)
+streamHistory &lt;- fromJSON(&quot;StreamingHistory1.json&quot;, flatten = TRUE)
+streamHistory &lt;- fromJSON(&quot;StreamingHistory2.json&quot;, flatten = TRUE)
+streamHistory &lt;- fromJSON(&quot;StreamingHistory3.json&quot;, flatten = TRUE)
+streamHistory &lt;- fromJSON(&quot;StreamingHistory4.json&quot;, flatten = TRUE)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRmluYWwgUHJvamVjdCIKZHVlIGRhdGU6ICIxMi8xNC8yMDIxIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyMgTG9hZCBMaWJyYXJpZXMgJiBEYXRhCmBgYHtyfQpsaWJyYXJ5KGpzb25saXRlKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShnZ2hpZ2hsaWdodCkKbGlicmFyeShzcG90aWZ5cikKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkoa25pdHIpCmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeShwbG90bHkpCmxpYnJhcnkoZXNxdWlzc2UpCgpzdHJlYW1IaXN0b3J5IDwtIGZyb21KU09OKCJTdHJlYW1pbmdIaXN0b3J5MC5qc29uIiwgZmxhdHRlbiA9IFRSVUUpCnN0cmVhbUhpc3RvcnkgPC0gZnJvbUpTT04oIlN0cmVhbWluZ0hpc3RvcnkxLmpzb24iLCBmbGF0dGVuID0gVFJVRSkKc3RyZWFtSGlzdG9yeSA8LSBmcm9tSlNPTigiU3RyZWFtaW5nSGlzdG9yeTIuanNvbiIsIGZsYXR0ZW4gPSBUUlVFKQpzdHJlYW1IaXN0b3J5IDwtIGZyb21KU09OKCJTdHJlYW1pbmdIaXN0b3J5My5qc29uIiwgZmxhdHRlbiA9IFRSVUUpCnN0cmVhbUhpc3RvcnkgPC0gZnJvbUpTT04oIlN0cmVhbWluZ0hpc3Rvcnk0Lmpzb24iLCBmbGF0dGVuID0gVFJVRSkKCmBgYA==</div>
 
 
 

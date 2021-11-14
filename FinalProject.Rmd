@@ -4,3 +4,22 @@ due date: "12/14/2021"
 output: html_notebook
 ---
 
+### Load Libraries & Data
+```{r}
+library(jsonlite)
+library(lubridate)
+library(gghighlight)
+library(spotifyr)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+library(plotly)
+library(esquisse)
+
+streamHistory <- fromJSON("StreamingHistory0.json", flatten = TRUE)
+streamHistory <- fromJSON("StreamingHistory1.json", flatten = TRUE)
+streamHistory <- fromJSON("StreamingHistory2.json", flatten = TRUE)
+streamHistory <- fromJSON("StreamingHistory3.json", flatten = TRUE)
+streamHistory <- fromJSON("StreamingHistory4.json", flatten = TRUE)
+
+```
