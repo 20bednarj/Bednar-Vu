@@ -77,8 +77,6 @@ streamHistoryGusAndJeremySong<-
 
 head(streamHistoryGusAndJeremySong)
 
-esquisser(streamHistoryGusAndJeremySong)
-
 ```
 
 ```{r}
@@ -92,45 +90,6 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 Sys.setenv(SPOTIFY_CLIENT_ID = '36a9ea1b654f4f8cbded39f1c2896de6')
 Sys.setenv(SPOTIFY_CLIENT_SECRET = 'a6571acabf7142cc9dbfddf0ecce6ee7')
 
-
-
-```
-
-```{r}
-library(spotifyr)
-uzi <- get_artist_audio_features('Lil Uzi Vert')
-
-library(dplyr)
-library(purrr)
-library(knitr)
-
-uzi %>% 
-    count(key_mode, sort = TRUE) %>% 
-    head(5) %>% 
-    kable()
-
-
-library(lubridate)
-
-get_my_recently_played(limit = 5) %>% 
-    mutate(
-        artist.name = map_chr(track.artists, function(x) x$name[1]),
-        played_at = as_datetime(played_at)
-        ) %>% 
-    select(
-      all_of(c("track.name", "artist.name", "track.album.name", "played_at"))
-      ) %>% 
-    kable()
-
-
-get_my_top_artists_or_tracks(type = 'artists', 
-                             time_range = 'long_term', 
-                             limit = 5) %>% 
-    select(.data$name, .data$genres) %>% 
-    rowwise %>% 
-    mutate(genres = paste(.data$genres, collapse = ', ')) %>% 
-    ungroup %>% 
-    kable()
 
 
 ```
