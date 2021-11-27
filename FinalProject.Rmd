@@ -83,13 +83,17 @@ streamHistoryGusAndJeremyArtist <-
 streamHistoryGusAndJeremySong %>%
   head(10)
 
-streamHistoryGusAndJeremySongEsquisse <-
-  streamHistoryGusAndJeremySong %>%
-  head(10)
+
 
 ```
 ### Esquisse for Songs & Artists
 ```{r}
+
+
+streamHistoryGusAndJeremySongEsquisse <-
+  streamHistoryGusAndJeremySong %>%
+  head(10)
+
 ggplot(streamHistoryGusAndJeremySongesquisse) +
   aes(x = trackName, fill = artistName, weight = msTotal) +
   geom_bar(position = "dodge") +
@@ -99,6 +103,23 @@ ggplot(streamHistoryGusAndJeremySongesquisse) +
   theme_bw() +
   theme(legend.position = "right") +
   facet_wrap(vars(Listener))
+
+streamHistoryGusAndJeremyArtistEsquisse <-
+  streamHistoryGusAndJeremyArtist %>%
+  head(10)
+
+ggplot(streamHistoryGusAndJeremyArtistEsquisse) +
+  aes(x = artistName, fill = artistName, weight = msTotal) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(y = "Total Listening Time in MS") +
+  coord_flip() +
+  theme_bw() +
+  facet_wrap(vars(Listener))
+
+
+
+
 ```
 
 
