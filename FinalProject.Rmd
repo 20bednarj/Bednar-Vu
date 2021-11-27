@@ -75,8 +75,22 @@ streamHistoryGusAndJeremySong<-
   filter(trackName != "Unknown Track") %>%
   arrange(desc(msTotal))
 
-head(streamHistoryGusAndJeremySong)
+streamHistoryGusAndJeremySong %>%
+  head(10)
 
+streamHistoryGusAndJeremySongesquisse <-
+  streamHistoryGusAndJeremySong %>%
+  head(10)
+
+ggplot(streamHistoryGusAndJeremySongesquisse) +
+  aes(x = trackName, fill = artistName, weight = msTotal) +
+  geom_bar(position = "dodge") +
+  scale_fill_hue(direction = 1) +
+  labs(y = "Total Listening Time in MS") +
+  coord_flip() +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  facet_wrap(vars(Listener))
 ```
 
 ```{r}
