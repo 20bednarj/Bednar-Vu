@@ -134,7 +134,11 @@ get_my_top_artists_or_tracks(type = 'artists',
 
 
 ```{r}
-
+CoPlaylist <-
+  streamHistoryJeremySong %>%
+  filter(msTotal <= 600000) %>%
+  inner_join(streamHistoryGusSong, by = c("trackName" = "trackName")) 
+  
 ```
 
 
