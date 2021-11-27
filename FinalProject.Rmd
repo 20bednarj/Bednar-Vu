@@ -79,17 +79,15 @@ head(streamHistoryGusAndJeremySong)
 ```
 
 ```{r}
-
-install.packages('spotifyr')
-
-devtools::install_github('charlie86/spotifyr')
+#gus
 
 Sys.setenv(SPOTIFY_CLIENT_ID = '949891eb08fe47cb8e6e031a841b76ba')
 Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 
-access_token <- http://localhost:1410/
+#jeremy
 
-
+Sys.setenv(SPOTIFY_CLIENT_ID = '36a9ea1b654f4f8cbded39f1c2896de6')
+Sys.setenv(SPOTIFY_CLIENT_SECRET = 'a6571acabf7142cc9dbfddf0ecce6ee7')
 
 
 
@@ -97,13 +95,13 @@ access_token <- http://localhost:1410/
 
 ```{r}
 library(spotifyr)
-beatles <- get_artist_audio_features('the beatles')
+uzi <- get_artist_audio_features('Lil Uzi Vert')
 
 library(dplyr)
 library(purrr)
 library(knitr)
 
-beatles %>% 
+uzi %>% 
     count(key_mode, sort = TRUE) %>% 
     head(5) %>% 
     kable()
