@@ -15,6 +15,9 @@ library(knitr)
 library(ggplot2)
 library(plotly)
 library(esquisse)
+library(dplyr)
+library(purrr)
+library(ggridges)
 
 # Gus history
 streamHistoryGus0 <- fromJSON("GusStreamingHistory0.json", flatten = TRUE)
@@ -119,12 +122,13 @@ streamHistoryGusAndJeremySong %>%
 
 ```
 
-### Esquisse for Songs & Artists
+### Top 10 Songs
 ```{r}
 
 #Top 10 songs Gus
 GusTopTenSong <-
   streamHistoryGusSong %>%
+  filter(trackName != "Unknown Track") %>%
   arrange(desc(msTotal)) %>%
   head(10)
 ggplot(GusTopTenSong) +
@@ -140,6 +144,7 @@ ggplot(GusTopTenSong) +
 #Top 10 Songs Jeremy
 JeremyTopTenSong <-
   streamHistoryJeremySong %>%
+  filter(trackName != "Unknown Track") %>%
   arrange(desc(msTotal)) %>%
   head(10)
 ggplot(Jeremytoptensong) +
@@ -157,6 +162,7 @@ ggplot(Jeremytoptensong) +
 ```{r}
 GusTopTenArtist <-
   streamHistoryGusArtist %>%
+  filter(artistName != "Unknown Artist") %>%
   arrange(desc(msTotal)) %>%
   head(10)
 ggplot(GusTopTenArtist) +
@@ -171,6 +177,7 @@ ggplot(GusTopTenArtist) +
 
 JeremyTopTenArtist <-
   streamHistoryJeremyArtist %>%
+  filter(artistName != "Unknown Artist") %>%
   arrange(desc(msTotal)) %>%
   head(10)
 ggplot(JeremyTopTenArtist) +
@@ -193,6 +200,12 @@ CoPlaylist <-
   filter(msTotal <= 600000) %>%
   inner_join(streamHistoryGusSong, by = c("trackName" = "trackName","artistName" = "artistName")) 
   
+```
+
+
+###emotional rolicoaster
+```{r}
+
 ```
 
 
