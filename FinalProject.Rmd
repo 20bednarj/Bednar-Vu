@@ -129,12 +129,14 @@ GusTopTenSong <-
   arrange(desc(msTotal)) %>%
   head(10)
 ggplot(GusTopTenSong) +
-  aes(x = trackName, fill = artistName, weight = msTotal) +
+  aes(x = reorder(trackName,+msTotal), fill = artistName, weight = msTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Gus Top 10 Songs") +
   coord_flip() +
-  theme_bw()
+  theme_bw() +
+  xlab("Track Name") +
+  ylab("Total Ms Listened")
 
 #Top 10 Songs Jeremy
 JeremyTopTenSong <-
@@ -142,13 +144,14 @@ JeremyTopTenSong <-
   arrange(desc(msTotal)) %>%
   head(10)
 ggplot(Jeremytoptensong) +
-  aes(x = trackName, fill = artistName, weight = msTotal) +
+  aes(x = reorder(trackName,+msTotal), fill = artistName, weight = msTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Jeremy Top 10 Songs") +
   coord_flip() +
-  theme_bw()
-
+  theme_bw() +
+  xlab("Track Name") +
+  ylab("Total Ms Listened")
 ```
 
 ###Top 10 Artists
@@ -158,24 +161,28 @@ GusTopTenArtist <-
   arrange(desc(msTotal)) %>%
   head(10)
 ggplot(GusTopTenArtist) +
-  aes(x = artistName, fill = artistName, weight = msTotal) +
+  aes(x = reorder(artistName,+msTotal), fill = artistName, weight = msTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Top 10 Artists For Gus") +
   coord_flip() +
-  theme_bw()
+  theme_bw() +
+  xlab("Artist") +
+  ylab("Total Ms Listened")
 
 JeremyTopTenArtist <-
   streamHistoryJeremyArtist %>%
   arrange(desc(msTotal)) %>%
   head(10)
 ggplot(JeremyTopTenArtist) +
-  aes(x = artistName, fill = artistName, weight = msTotal) +
+  aes(x = reorder(artistName,+msTotal), fill = artistName, weight = msTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Top 10 Artists For Jeremy") +
   coord_flip() +
-  theme_bw()
+  theme_bw() +
+  xlab("Artist") +
+  ylab("Total Ms Listened")
 
 ```
 
