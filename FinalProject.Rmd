@@ -202,6 +202,38 @@ CoPlaylist <-
   
 ```
 
+### Top 10 Songs On CoPlaylist
+```{r}
+GusCoPlay <-
+  CoPlaylist %>%
+  select(trackName,artistName,msTotal.y,Listener.y) %>%
+  arrange(desc(msTotal.y)) %>%
+  head(10)
+ggplot(GusCoPlay) +
+  aes(x = reorder(trackName,+msTotal.y), fill = artistName, weight = msTotal.y) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(title = "Gus' Top 10 Songs On CoPlayList") +
+  coord_flip() +
+  theme_bw()
+
+
+JeremyCoPlay <-
+  CoPlaylist %>%
+  select(trackName,artistName,msTotal.x,Listener.x) %>%
+  arrange(desc(msTotal.x)) %>%
+  head(10)
+ggplot(JeremyCoPlay) +
+  aes(x = reorder(trackName,+msTotal.x), fill = artistName, weight = msTotal.x) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(title = "Jeremy's Top 10 Songs On CoPlayList") +
+  coord_flip() +
+  theme_bw()
+  
+```
+
+
 
 ### Top 10 songs Audio Features
 ```{r}
