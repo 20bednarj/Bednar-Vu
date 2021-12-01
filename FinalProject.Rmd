@@ -95,11 +95,31 @@ streamHistoryGusAndJeremySong %>%
 ### Esquisse for Songs & Artists
 ```{r}
 
-#Top 10 songs gus
+#Top 10 songs Gus
+Gustoptensong <-
+  streamHistoryGusSong %>%
+  arrange(desc(msTotal)) %>%
+  head(10)
+ggplot(Gustoptensong) +
+  aes(x = trackName, fill = artistName, weight = msTotal) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(title = "Gus Top 10 Songs") +
+  coord_flip() +
+  theme_bw()
 
-
-
-
+#Top 10 Songs Jeremy
+Jeremytoptensong <-
+  streamHistoryJeremySong %>%
+  arrange(desc(msTotal)) %>%
+  head(10)
+ggplot(Jeremytoptensong) +
+  aes(x = trackName, fill = artistName, weight = msTotal) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(title = "Jeremy Top 10 Songs") +
+  coord_flip() +
+  theme_bw()
 
 
 #####
