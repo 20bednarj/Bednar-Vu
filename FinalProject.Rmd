@@ -95,7 +95,14 @@ streamHistoryGusAndJeremySong %>%
 ### Esquisse for Songs & Artists
 ```{r}
 
+#Top 10 songs gus
 
+
+
+
+
+
+#####
 streamHistoryGusAndJeremySongEsquisse <-
   streamHistoryGusAndJeremySong %>%
   head(10)
