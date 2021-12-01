@@ -15,6 +15,9 @@ library(knitr)
 library(ggplot2)
 library(plotly)
 library(esquisse)
+library(dplyr)
+library(purrr)
+library(ggridges)
 
 # Gus history
 streamHistoryGus0 <- fromJSON("GusStreamingHistory0.json", flatten = TRUE)
