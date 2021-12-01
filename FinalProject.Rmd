@@ -39,7 +39,6 @@ streamHistoryGus <-
   streamHistoryGus0 %>%
   full_join(streamHistoryGus1)
 
-
 #API Access (Gus)
 Sys.setenv(SPOTIFY_CLIENT_ID = '949891eb08fe47cb8e6e031a841b76ba')
 Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
@@ -154,7 +153,7 @@ ggplot(Jeremytoptensong) +
   ylab("Total Ms Listened")
 ```
 
-###Top 10 Artists
+### Top 10 Artists
 ```{r}
 GusTopTenArtist <-
   streamHistoryGusArtist %>%
