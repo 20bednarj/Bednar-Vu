@@ -181,7 +181,6 @@ ggplot(JeremyTopTenArtist) +
 
 ```
 
-
 ### Initial CoPlaylist
 ```{r}
 CoPlaylist <-
@@ -225,8 +224,6 @@ ggplot(JeremyCoPlay) +
   theme_bw()
   
 ```
-
-
 
 ### Top 10 songs Audio Features
 ```{r}
