@@ -188,7 +188,7 @@ CoPlaylist <-
   streamHistoryJeremySong %>%
   filter(msTotal <= 600000) %>%
   inner_join(streamHistoryGusSong, by = c("trackName" = "trackName","artistName" = "artistName")) 
-  
+CoPlaylist
 ```
 
 ### Top 10 Songs On CoPlaylist
