@@ -35,6 +35,17 @@ access_token <- get_spotify_access_token()
 ```
 
 ### streamHistory Combined
+```{r}
+#Adding "User" to streamHistoryOG tables
+
+streamHistoryJeremy %>%
+  mutate(Listener = 'Jeremy')
+
+streamHistoryGus %>%
+  mutate(Listener = 'Gus')
+  
+
+```
 
 ### Listening Length Per User By Song
 ```{r}
