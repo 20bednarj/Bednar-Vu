@@ -17,15 +17,28 @@ library(plotly)
 library(esquisse)
 
 # Gus history
-streamHistoryGus <- fromJSON("GusStreamingHistory0.json", flatten = TRUE)
-streamHistoryGus <- fromJSON("GusStreamingHistory1.json", flatten = TRUE)
+streamHistoryGus0 <- fromJSON("GusStreamingHistory0.json", flatten = TRUE)
+streamHistoryGus1 <- fromJSON("GusStreamingHistory1.json", flatten = TRUE)
 
 # Jeremy history
-streamHistoryJeremy <- fromJSON("JeremyStreamingHistory0 copy.json", flatten = TRUE)
-streamHistoryJeremy <- fromJSON("JeremyStreamingHistory1 copy.json", flatten = TRUE)
-streamHistoryJeremy <- fromJSON("JeremyStreamingHistory2 copy.json", flatten = TRUE)
-streamHistoryJeremy <- fromJSON("JeremyStreamingHistory3 copy.json", flatten = TRUE)
-streamHistoryJeremy <- fromJSON("JeremyStreamingHistory4 copy.json", flatten = TRUE)
+streamHistoryJeremy0 <- fromJSON("JeremyStreamingHistory0 copy.json", flatten = TRUE)
+streamHistoryJeremy1 <- fromJSON("JeremyStreamingHistory1 copy.json", flatten = TRUE)
+streamHistoryJeremy2 <- fromJSON("JeremyStreamingHistory2 copy.json", flatten = TRUE)
+streamHistoryJeremy3 <- fromJSON("JeremyStreamingHistory3 copy.json", flatten = TRUE)
+streamHistoryJeremy4 <- fromJSON("JeremyStreamingHistory4 copy.json", flatten = TRUE)
+
+# Joining Data Frames Per User
+streamHistoryJeremy <-
+  streamHistoryJeremy0 %>%
+  full_join(streamHistoryJeremy1) %>%
+  full_join(streamHistoryJeremy2) %>%
+  full_join(streamHistoryJeremy3) %>%
+  full_join(streamHistoryJeremy4)
+
+streamHistoryGus <-
+  streamHistoryGus0 %>%
+  full_join(streamHistoryGus1)
+
 
 #API Access (Gus)
 Sys.setenv(SPOTIFY_CLIENT_ID = '949891eb08fe47cb8e6e031a841b76ba')
