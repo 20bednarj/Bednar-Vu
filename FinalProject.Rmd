@@ -34,7 +34,7 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 access_token <- get_spotify_access_token()
 ```
 
-
+### streamHistory Combined
 
 ### Listening Length Per User By Song
 ```{r}
@@ -72,16 +72,20 @@ streamHistoryGusArtist <-
 
 ```
 
-### Gus and Jeremy Full Join
+### Gus and Jeremy Full Join (streamHistory, Song, and Artist)
 ```{r}
+streamHistoryGusAndJeremyOG <-
+  streamHistoryGus %>%
+  full_join(streamHistoryJeremy) 
+
 streamHistoryGusAndJeremySong<-
-  streamHistoryGusSong%>%
+  streamHistoryGusSong %>%
   full_join(streamHistoryJeremySong) %>%
   filter(trackName != "Unknown Track") %>%
   arrange(desc(msTotal))
 
 streamHistoryGusAndJeremyArtist <-
-  streamHistoryGusArtist%>%
+  streamHistoryGusArtist %>%
   full_join(streamHistoryJeremyArtist) %>%
   arrange(desc(msTotal))
 
