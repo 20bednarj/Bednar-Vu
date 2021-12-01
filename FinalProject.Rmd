@@ -213,7 +213,9 @@ ggplot(GusCoPlay) +
   aes(x = reorder(trackName,+msTotal.y), fill = artistName, weight = msTotal.y) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
-  labs(title = "Gus' Top 10 Songs On CoPlayList") +
+  labs(title = "Gus' Top 15 Songs On CoPlayList") +
+  ylab("Total Time (ms)") +
+  xlab("Song Name") +
   coord_flip() +
   theme_bw()
 
@@ -227,7 +229,9 @@ ggplot(JeremyCoPlay) +
   aes(x = reorder(trackName,+msTotal.x), fill = artistName, weight = msTotal.x) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
-  labs(title = "Jeremy's Top 10 Songs On CoPlayList") +
+  labs(title = "Jeremy's Top 15 Songs On CoPlayList") +
+  ylab("Total Time (ms)") +
+  xlab("Song Name") +
   coord_flip() +
   theme_bw()
   
