@@ -111,11 +111,11 @@ streamHistoryGusAndJeremySong %>%
 ```{r}
 
 #Top 10 songs Gus
-Gustoptensong <-
+GusTopTenSong <-
   streamHistoryGusSong %>%
   arrange(desc(msTotal)) %>%
   head(10)
-ggplot(Gustoptensong) +
+ggplot(GusTopTenSong) +
   aes(x = trackName, fill = artistName, weight = msTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
@@ -124,7 +124,7 @@ ggplot(Gustoptensong) +
   theme_bw()
 
 #Top 10 Songs Jeremy
-Jeremytoptensong <-
+JeremyTopTenSong <-
   streamHistoryJeremySong %>%
   arrange(desc(msTotal)) %>%
   head(10)
@@ -136,46 +136,15 @@ ggplot(Jeremytoptensong) +
   coord_flip() +
   theme_bw()
 
-
-#####
-streamHistoryGusAndJeremySongEsquisse <-
-  streamHistoryGusAndJeremySong %>%
-  head(10)
-
-ggplot(streamHistoryGusAndJeremySongesquisse) +
-  aes(x = trackName, fill = artistName, weight = msTotal) +
-  geom_bar(position = "dodge") +
-  scale_fill_hue(direction = 1) +
-  labs(y = "Total Listening Time in MS") +
-  coord_flip() +
-  theme_bw() +
-  theme(legend.position = "right") +
-  facet_wrap(vars(Listener))
-
-streamHistoryGusAndJeremyArtistEsquisse <-
-  streamHistoryGusAndJeremyArtist %>%
-  head(10)
-
-ggplot(streamHistoryGusAndJeremyArtistEsquisse) +
-  aes(x = artistName, fill = artistName, weight = msTotal) +
-  geom_bar() +
-  scale_fill_hue(direction = 1) +
-  labs(y = "Total Listening Time in MS") +
-  coord_flip() +
-  facet_wrap(vars(Listener))
-
-
-
-
 ```
 
 ###Top 10 Artists
 ```{r}
-Gustop10artist <-
+GusTopTenArtist <-
   streamHistoryGusArtist %>%
   arrange(desc(msTotal)) %>%
   head(10)
-ggplot(Gustop10artist) +
+ggplot(GusTopTenArtist) +
   aes(x = artistName, fill = artistName, weight = msTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
@@ -183,11 +152,11 @@ ggplot(Gustop10artist) +
   coord_flip() +
   theme_bw()
 
-Jeremytop10artist <-
+JeremyTopTenArtist <-
   streamHistoryJeremyArtist %>%
   arrange(desc(msTotal)) %>%
   head(10)
-ggplot(Jeremytop10artist) +
+ggplot(JeremyTopTenArtist) +
   aes(x = artistName, fill = artistName, weight = msTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
