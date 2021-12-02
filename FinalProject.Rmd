@@ -227,7 +227,14 @@ ggplot(JeremyCoPlay) +
 
 ### Top 10 songs Audio Features
 ```{r}
-get_track_audio_features("2VjXGuPVVxyhMgER3Uz2Fe", authorization = access_token)
+GusAudioFeatures <-
+  get_track_audio_features("2VjXGuPVVxyhMgER3Uz2Fe,0uEp9E98JB5awlA084uaIg,2tQM1BUrXp2kqOM6mN11TC,0Uyh92tLyb9JawG8lmWCzJ,2IyL2CyHoenwQLds5jSuqK,2IGmmvcqp9h3LcxG8SCT0U,7x6hO9VMAee9x1iWaeNkL6,3QLjDkgLh9AOEHlhQtDuhs,0bHs3ly4Bv5BlzE3KrePfX,6sIMSl1n3KDPr03Fw8mujd", authorization = access_token)
+
 ```
 
+
+
+```{r}
+
+```
 
