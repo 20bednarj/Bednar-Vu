@@ -252,10 +252,27 @@ GusAudioFeatures <-
 
 
 ```{r}
-favArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
-favArtist2 <- get_artist_audio_features(artist= "Erykah Badu")
-favArtist3 <- get_artist_audio_features(artist= "2Pac")
-favArtist4 <- get_artist_audio_features(artist= "Lil Wayne")
+GusfavArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
+GusfavArtist2 <- get_artist_audio_features(artist= "Erykah Badu")
+GusfavArtist3 <- get_artist_audio_features(artist= "2Pac")
+GusfavArtist4 <- get_artist_audio_features(artist= "Lil Wayne")
+GusfavArtist5 <- get_artist_audio_features(artist= "Jay-Z")
+
+
+GusTop5Audio <-
+  GusfavArtist1 %>%
+  full_join(GusfavArtist2)%>%
+  full_join(GusfavArtist3)%>%
+  full_join(GusfavArtist4)%>%
+  full_join(GusfavArtist5) %>%
+  summarise(danceability = sum(danceability)/5,energy = sum(energy)/5, tempo = sum(tempo)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5,instrumentalness = sum(instrumentalness)/5)%>%
+  pivot_longer()
+
+library(data.table)
+mydata <- data.table(col0=c("row1","row2","row3"),
+                     col1=c(11,21,31),
+                     col2=c(12,22,32),
+                     col3=c(13,23,33))
 ```
 
 
