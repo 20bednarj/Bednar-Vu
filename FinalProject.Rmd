@@ -74,14 +74,14 @@ streamHistoryJeremySong <-
     streamHistoryJeremy %>%
     group_by(trackName, artistName) %>%
     select(artistName, trackName, sPlayed) %>%
-    summarize(msTotal = sum(sPlayed)) %>%
+    summarize(sTotal = sum(sPlayed)) %>%
     mutate(Listener = "Jeremy")
 
 streamHistoryGusSong <- 
     streamHistoryGus %>%
     group_by(trackName, artistName) %>%
     select(artistName, trackName, sPlayed) %>%
-    summarize(msTotal = sum(sPlayed)) %>%
+    summarize(sTotal = sum(sPlayed)) %>%
     mutate(Listener = "Gus")
 
 ```
@@ -92,14 +92,14 @@ streamHistoryJeremyArtist <-
     streamHistoryJeremy %>%
     group_by(artistName) %>%
     select(artistName, trackName, sPlayed) %>%
-    summarize(msTotal = sum(sPlayed)) %>%
+    summarize(sTotal = sum(sPlayed)) %>%
     mutate(Listener = "Jeremy")
 
 streamHistoryGusArtist <- 
     streamHistoryGus %>%
     group_by(artistName) %>%
     select(artistName, trackName, sPlayed) %>%
-    summarize(msTotal = sum(sPlayed)) %>%
+    summarize(sTotal = sum(sPlayed)) %>%
     mutate(Listener = "Gus")
 
 ```
@@ -114,16 +114,15 @@ streamHistoryGusAndJeremySong<-
   streamHistoryGusSong %>%
   full_join(streamHistoryJeremySong) %>%
   filter(trackName != "Unknown Track") %>%
-  arrange(desc(msTotal))
+  arrange(desc(sTotal))
 
 streamHistoryGusAndJeremyArtist <-
   streamHistoryGusArtist %>%
   full_join(streamHistoryJeremyArtist) %>%
-  arrange(desc(msTotal))
+  arrange(desc(sTotal))
 
 streamHistoryGusAndJeremySong %>%
   head(10)
-
 
 
 ```
@@ -135,33 +134,33 @@ streamHistoryGusAndJeremySong %>%
 GusTopTenSong <-
   streamHistoryGusSong %>%
   filter(trackName != "Unknown Track") %>%
-  arrange(desc(msTotal)) %>%
+  arrange(desc(sTotal)) %>%
   head(10)
 ggplot(GusTopTenSong) +
-  aes(x = reorder(trackName,+msTotal), fill = artistName, weight = msTotal) +
+  aes(x = reorder(trackName,+sTotal), fill = artistName, weight = sTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Gus Top 10 Songs") +
   coord_flip() +
   theme_bw() +
   xlab("Track Name") +
-  ylab("Total Ms Listened")
+  ylab("Total Listened (Seconds)")
 
 #Top 10 Songs Jeremy
 JeremyTopTenSong <-
   streamHistoryJeremySong %>%
   filter(trackName != "Unknown Track") %>%
-  arrange(desc(msTotal)) %>%
+  arrange(desc(sTotal)) %>%
   head(10)
 ggplot(JeremyTopTenSong) +
-  aes(x = reorder(trackName,+msTotal), fill = artistName, weight = msTotal) +
+  aes(x = reorder(trackName,+sTotal), fill = artistName, weight = sTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Jeremy Top 10 Songs") +
   coord_flip() +
   theme_bw() +
   xlab("Track Name") +
-  ylab("Total Ms Listened")
+  ylab("Total Listened (Seconds)")
 ```
 
 ### Top 10 Artists
@@ -169,32 +168,32 @@ ggplot(JeremyTopTenSong) +
 GusTopTenArtist <-
   streamHistoryGusArtist %>%
   filter(artistName != "Unknown Artist") %>%
-  arrange(desc(msTotal)) %>%
+  arrange(desc(sTotal)) %>%
   head(10)
 ggplot(GusTopTenArtist) +
-  aes(x = reorder(artistName,+msTotal), fill = artistName, weight = msTotal) +
+  aes(x = reorder(artistName,+sTotal), fill = artistName, weight = sTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Top 10 Artists For Gus") +
   coord_flip() +
   theme_bw() +
   xlab("Artist") +
-  ylab("Total Ms Listened")
+  ylab("Total Listened (Seconds)")
 
 JeremyTopTenArtist <-
   streamHistoryJeremyArtist %>%
   filter(artistName != "Unknown Artist") %>%
-  arrange(desc(msTotal)) %>%
+  arrange(desc(sTotal)) %>%
   head(10)
 ggplot(JeremyTopTenArtist) +
-  aes(x = reorder(artistName,+msTotal), fill = artistName, weight = msTotal) +
+  aes(x = reorder(artistName,+sTotal), fill = artistName, weight = sTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Top 10 Artists For Jeremy") +
   coord_flip() +
   theme_bw() +
   xlab("Artist") +
-  ylab("Total Ms Listened")
+  ylab("Total Listened (Seconds)")
 
 ```
 
@@ -202,7 +201,7 @@ ggplot(JeremyTopTenArtist) +
 ```{r}
 CoPlaylist <-
   streamHistoryJeremySong %>%
-  filter(msTotal <= 600000) %>%
+  filter(sTotal <= 600000) %>%
   inner_join(streamHistoryGusSong, by = c("trackName" = "trackName","artistName" = "artistName")) 
 CoPlaylist
 ```
@@ -211,15 +210,15 @@ CoPlaylist
 ```{r}
 GusCoPlay <-
   CoPlaylist %>%
-  select(trackName,artistName,msTotal.y,Listener.y) %>%
-  arrange(desc(msTotal.y)) %>%
+  select(trackName,artistName,sTotal.y,Listener.y) %>%
+  arrange(desc(sTotal.y)) %>%
   head(15)
 ggplot(GusCoPlay) +
-  aes(x = reorder(trackName,+msTotal.y), fill = artistName, weight = msTotal.y) +
+  aes(x = reorder(trackName,+sTotal.y), fill = artistName, weight = sTotal.y) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Gus' Top 15 Songs On CoPlayList") +
-  ylab("Total Time (ms)") +
+  ylab("Total Time (Seconds)") +
   xlab("Song Name") +
   coord_flip() +
   theme_bw()
@@ -227,15 +226,15 @@ ggplot(GusCoPlay) +
 
 JeremyCoPlay <-
   CoPlaylist %>%
-  select(trackName,artistName,msTotal.x,Listener.x) %>%
-  arrange(desc(msTotal.x)) %>%
+  select(trackName,artistName,sTotal.x,Listener.x) %>%
+  arrange(desc(sTotal.x)) %>%
   head(15)
 ggplot(JeremyCoPlay) +
-  aes(x = reorder(trackName,+msTotal.x), fill = artistName, weight = msTotal.x) +
+  aes(x = reorder(trackName,+sTotal.x), fill = artistName, weight = sTotal.x) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(title = "Jeremy's Top 15 Songs On CoPlayList") +
-  ylab("Total Time (ms)") +
+  ylab("Total Time (Seconds)") +
   xlab("Song Name") +
   coord_flip() +
   theme_bw()
