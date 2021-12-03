@@ -38,12 +38,14 @@ streamHistoryJeremy <-
   full_join(streamHistoryJeremy2) %>%
   full_join(streamHistoryJeremy3) %>%
   full_join(streamHistoryJeremy4) %>%
-  mutate(Listener = "Jeremy")
+  mutate(Listener = "Jeremy") %>%
+  mutate(sPlayed = msPlayed/1000)
 
 streamHistoryGus <-
   streamHistoryGus0 %>%
   full_join(streamHistoryGus1) %>%
-  mutate(Listener = "Gus")
+  mutate(Listener = "Gus") %>%
+  mutate(sPlayed = msPlayed/1000)
 
 #API Access (Gus)
 Sys.setenv(SPOTIFY_CLIENT_ID = '949891eb08fe47cb8e6e031a841b76ba')
@@ -52,20 +54,34 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 access_token <- get_spotify_access_token()
 ```
 
+### Total Listening Length Per User (Changed msPlayed to sPlayed)
+```{r}
+streamHistoryTotalJeremy <- 
+  streamHistoryJeremy %>%
+  filter(trackName != 'Unknown Track') %>%
+  summarise(TotalPlayed = sum(sPlayed))
+
+streamHistoryTotalGus <- 
+  streamHistoryJeremy %>%
+  filter(trackName != 'Unknown Track') %>%
+  summarise(TotalPlayed = sum(sPlayed))
+```
+
+
 ### Listening Length Per User By Song
 ```{r}
 streamHistoryJeremySong <- 
     streamHistoryJeremy %>%
     group_by(trackName, artistName) %>%
-    select(artistName, trackName, msPlayed) %>%
-    summarize(msTotal = sum(msPlayed)) %>%
+    select(artistName, trackName, sPlayed) %>%
+    summarize(msTotal = sum(sPlayed)) %>%
     mutate(Listener = "Jeremy")
 
 streamHistoryGusSong <- 
     streamHistoryGus %>%
     group_by(trackName, artistName) %>%
-    select(artistName, trackName, msPlayed) %>%
-    summarize(msTotal = sum(msPlayed)) %>%
+    select(artistName, trackName, sPlayed) %>%
+    summarize(msTotal = sum(sPlayed)) %>%
     mutate(Listener = "Gus")
 
 ```
@@ -75,15 +91,15 @@ streamHistoryGusSong <-
 streamHistoryJeremyArtist <- 
     streamHistoryJeremy %>%
     group_by(artistName) %>%
-    select(artistName, trackName, msPlayed) %>%
-    summarize(msTotal = sum(msPlayed)) %>%
+    select(artistName, trackName, sPlayed) %>%
+    summarize(msTotal = sum(sPlayed)) %>%
     mutate(Listener = "Jeremy")
 
 streamHistoryGusArtist <- 
     streamHistoryGus %>%
     group_by(artistName) %>%
-    select(artistName, trackName, msPlayed) %>%
-    summarize(msTotal = sum(msPlayed)) %>%
+    select(artistName, trackName, sPlayed) %>%
+    summarize(msTotal = sum(sPlayed)) %>%
     mutate(Listener = "Gus")
 
 ```
@@ -137,7 +153,7 @@ JeremyTopTenSong <-
   filter(trackName != "Unknown Track") %>%
   arrange(desc(msTotal)) %>%
   head(10)
-ggplot(Jeremytoptensong) +
+ggplot(JeremyTopTenSong) +
   aes(x = reorder(trackName,+msTotal), fill = artistName, weight = msTotal) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
@@ -188,7 +204,7 @@ CoPlaylist <-
   streamHistoryJeremySong %>%
   filter(msTotal <= 600000) %>%
   inner_join(streamHistoryGusSong, by = c("trackName" = "trackName","artistName" = "artistName")) 
-CoPaylist
+CoPlaylist
 ```
 
 ### Top 10 Songs On CoPlaylist
@@ -239,30 +255,8 @@ GusAudioFeatures <-
 favArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
 favArtist2 <- get_artist_audio_features(artist= "Erykah Badu")
 favArtist3 <- get_artist_audio_features(artist= "2Pac")
-```
-
-
-```{r}
 favArtist4 <- get_artist_audio_features(artist= "Lil Wayne")
 ```
-
-```{python}
-
-# grouping the dataset as per artist name and counting the songs per artist
-artist_length streamHistoryGus.groupby('artistName',as_index=False).sum()
-artist_song_cnt = streamHistoryGus.groupby('artistName',as_index=False).agg({"trackName": "nunique"})
-
-# merge artist_length and artist_song_cnt 
-artist_length_uniqsong = pd.merge(artist_length,artist_song_cnt,how='left',on='artistName',copy=False)
-artist_length_uniqsong.rename(columns={'trackName':'unique_track_number'},inplace=True)
-
-# sorting the df by minutes played
-max_time  = artist_length_uniqsong.sort_values(by=['mins_played'])
-
-# top 30 artist I listen to (tail because the df is in ascending order of count of minutes)
-most_heard_30 = max_time.tail(30)
-```
-
 
 
 
