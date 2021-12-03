@@ -18,6 +18,7 @@ library(esquisse)
 library(dplyr)
 library(purrr)
 library(ggridges)
+library(reticulate)
 
 # Gus history
 streamHistoryGus0 <- fromJSON("GusStreamingHistory0.json", flatten = TRUE)
@@ -235,6 +236,33 @@ GusAudioFeatures <-
 
 
 ```{r}
-
+favArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
+favArtist2 <- get_artist_audio_features(artist= "Erykah Badu")
+favArtist3 <- get_artist_audio_features(artist= "2Pac")
 ```
+
+
+```{r}
+favArtist4 <- get_artist_audio_features(artist= "Lil Wayne")
+```
+
+```{python}
+
+# grouping the dataset as per artist name and counting the songs per artist
+artist_length streamHistoryGus.groupby('artistName',as_index=False).sum()
+artist_song_cnt = streamHistoryGus.groupby('artistName',as_index=False).agg({"trackName": "nunique"})
+
+# merge artist_length and artist_song_cnt 
+artist_length_uniqsong = pd.merge(artist_length,artist_song_cnt,how='left',on='artistName',copy=False)
+artist_length_uniqsong.rename(columns={'trackName':'unique_track_number'},inplace=True)
+
+# sorting the df by minutes played
+max_time  = artist_length_uniqsong.sort_values(by=['mins_played'])
+
+# top 30 artist I listen to (tail because the df is in ascending order of count of minutes)
+most_heard_30 = max_time.tail(30)
+```
+
+
+
 
