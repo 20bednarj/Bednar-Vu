@@ -177,8 +177,8 @@ ggplot(JeremyTopTenSong) +
 ```
 
 ### Top 10 Artists
-
 ```{r}
+#graphs and visuals for significant information
 GusTopTenArtist <-
   streamHistoryGusArtist %>%
   filter(artistName != "Unknown Artist") %>%
@@ -214,6 +214,7 @@ ggplot(JeremyTopTenArtist) +
 ### Initial CoPlaylist
 
 ```{r}
+#creating a playlist of songs that both users listen to
 CoPlaylist <-
   streamHistoryJeremySong %>%
   filter(sTotal <= 600000) %>%
@@ -224,6 +225,7 @@ CoPlaylist
 ### Top 10 Songs On CoPlaylist
 
 ```{r}
+#songs each of us listen to a lot that the other has heard before
 GusCoPlay <-
   CoPlaylist %>%
   select(trackName,artistName,sTotal.y,Listener.y) %>%
