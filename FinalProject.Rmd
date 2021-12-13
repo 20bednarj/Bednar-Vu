@@ -1,11 +1,13 @@
 ---
 title: "Final Project"
 due date: "12/14/2021"
+author: "Gus Vu & Jeremy Bednar"
 output: html_notebook
 ---
 
 ### Load Libraries & Data
-```{r}
+
+```{r include=FALSE}
 library(jsonlite)
 library(lubridate)
 library(gghighlight)
@@ -31,7 +33,7 @@ streamHistoryJeremy2 <- fromJSON("JeremyStreamingHistory2 copy.json", flatten = 
 streamHistoryJeremy3 <- fromJSON("JeremyStreamingHistory3 copy.json", flatten = TRUE)
 streamHistoryJeremy4 <- fromJSON("JeremyStreamingHistory4 copy.json", flatten = TRUE)
 
-# Joining Data Frames Per User
+# Joining Data Frames Per User + converting "msPlayed" to seconds
 streamHistoryJeremy <-
   streamHistoryJeremy0 %>%
   full_join(streamHistoryJeremy1) %>%
@@ -54,22 +56,26 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 access_token <- get_spotify_access_token()
 ```
 
-### Total Listening Length Per User (Changed msPlayed to sPlayed)
+### Total Listening Length Per User (in seconds)
+
 ```{r}
+#Total listening time of the time interval for which the data was collected (including "banned artists")
 streamHistoryTotalJeremy <- 
   streamHistoryJeremy %>%
-  filter(trackName != 'Unknown Track') %>%
   summarise(TotalPlayed = sum(sPlayed))
+streamHistoryTotalJeremy
 
 streamHistoryTotalGus <- 
-  streamHistoryJeremy %>%
-  filter(trackName != 'Unknown Track') %>%
+  streamHistoryGus %>%
   summarise(TotalPlayed = sum(sPlayed))
+streamHistoryTotalGus
+
 ```
 
-
 ### Listening Length Per User By Song
+
 ```{r}
+#total listening time per song
 streamHistoryJeremySong <- 
     streamHistoryJeremy %>%
     group_by(trackName, artistName) %>%
@@ -87,7 +93,9 @@ streamHistoryGusSong <-
 ```
 
 ### Listening Length Per User By Artist
+
 ```{r}
+#total listening time for all artists
 streamHistoryJeremyArtist <- 
     streamHistoryJeremy %>%
     group_by(artistName) %>%
@@ -105,17 +113,21 @@ streamHistoryGusArtist <-
 ```
 
 ### Gus and Jeremy Full Join (streamHistory, Song, and Artist)
+
 ```{r}
+#combining the original streamHistory tables for Gus & Jeremy
 streamHistoryGusAndJeremyOG <-
   streamHistoryGus %>%
   full_join(streamHistoryJeremy) 
 
+#total listening time per song for both users
 streamHistoryGusAndJeremySong<-
   streamHistoryGusSong %>%
   full_join(streamHistoryJeremySong) %>%
   filter(trackName != "Unknown Track") %>%
   arrange(desc(sTotal))
 
+#total listening time for all artists either user listened to
 streamHistoryGusAndJeremyArtist <-
   streamHistoryGusArtist %>%
   full_join(streamHistoryJeremyArtist) %>%
@@ -128,6 +140,7 @@ streamHistoryGusAndJeremySong %>%
 ```
 
 ### Top 10 Songs
+
 ```{r}
 
 #Top 10 songs Gus
@@ -165,6 +178,7 @@ ggplot(JeremyTopTenSong) +
 
 ### Top 10 Artists
 ```{r}
+#graphs and visuals for significant information
 GusTopTenArtist <-
   streamHistoryGusArtist %>%
   filter(artistName != "Unknown Artist") %>%
@@ -198,7 +212,9 @@ ggplot(JeremyTopTenArtist) +
 ```
 
 ### Initial CoPlaylist
+
 ```{r}
+#creating a playlist of songs that both users listen to
 CoPlaylist <-
   streamHistoryJeremySong %>%
   filter(sTotal <= 600000) %>%
@@ -207,7 +223,9 @@ CoPlaylist
 ```
 
 ### Top 10 Songs On CoPlaylist
+
 ```{r}
+#songs each of us listen to a lot that the other has heard before
 GusCoPlay <-
   CoPlaylist %>%
   select(trackName,artistName,sTotal.y,Listener.y) %>%
@@ -238,19 +256,18 @@ ggplot(JeremyCoPlay) +
   xlab("Song Name") +
   coord_flip() +
   theme_bw()
-  
+
 ```
 
 ### Top 10 songs Audio Features
+
 ```{r}
 GusAudioFeatures <-
   get_track_audio_features("2VjXGuPVVxyhMgER3Uz2Fe,0uEp9E98JB5awlA084uaIg,2tQM1BUrXp2kqOM6mN11TC,0Uyh92tLyb9JawG8lmWCzJ,2IyL2CyHoenwQLds5jSuqK,2IGmmvcqp9h3LcxG8SCT0U,7x6hO9VMAee9x1iWaeNkL6,3QLjDkgLh9AOEHlhQtDuhs,0bHs3ly4Bv5BlzE3KrePfX,6sIMSl1n3KDPr03Fw8mujd", authorization = access_token)
 
 ```
 
-
-
-```{r}
+```{r eval=FALSE, include=FALSE}
 GusfavArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
 GusfavArtist2 <- get_artist_audio_features(artist= "Erykah Badu")
 GusfavArtist3 <- get_artist_audio_features(artist= "2Pac")
@@ -270,6 +287,3 @@ GusTop5Audio <-
 
 
 ```
-
-
-
