@@ -283,15 +283,15 @@ GusTop5Audio <-
   full_join(GusfavArtist3)%>%
   full_join(GusfavArtist4)%>%
   full_join(GusfavArtist5)%>%
-  summarise(danceability = sum(danceability)/5,energy = sum(energy)/5, tempo = sum(tempo)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5,instrumentalness = sum(instrumentalness)/5) 
+  summarise(danceability = sum(danceability)/5,energy = sum(energy)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5) 
 
 #Make new data frame so we can graph easier
-Audio_Features <- c("danceability", "energy", "tempo", "speechiness", "acousticness", "instrumentalness")
-Score <- c(402.590400, 408.287008, 66377.763800, 158.053660, 91.696080, 6.327396)
+Audio_Features <- c("danceability", "energy", "speechiness", "acousticness")
+Score <- c(402.590400, 408.287008, 158.053660, 91.696080)
 Gus_Top_5Audio <- data.frame(Audio_Features, Score) 
 
 
-ggplot(data = Gus_Top_5Audio, aes(x =Audio_Features, y = Score, fill = Audio_Features)) +
+ggplot(Gus_Top_5Audio, aes(x =Audio_Features, y = Score, fill = Audio_Features)) +
   geom_col() +
   labs(title = "Average Audio Features of Gus' Top 5 Artists")
 
@@ -308,15 +308,15 @@ JeremyTop5Audio <-
   full_join(JeremyfavArtist3)%>%
   full_join(JeremyfavArtist4)%>%
   full_join(JeremyfavArtist5)%>%
-  summarise(danceability = sum(danceability)/5,energy = sum(energy)/5, tempo = sum(tempo)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5,instrumentalness = sum(instrumentalness)/5)
+  summarise(danceability = sum(danceability)/5,energy = sum(energy)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5)
 
 
 #Make new data frame so we can graph easier
-JAudio_Features <- c("danceability", "energy", "tempo", "speechiness", "acousticness", "instrumentalness")
-JScore <- c(208.6264, 178.6905, 38284.76, 65.90458, 51.64297, 6.977631)
+JAudio_Features <- c("danceability", "energy", "speechiness", "acousticness")
+JScore <- c(208.6264, 178.6905, 65.90458, 51.64297)
 Jeremy_Top_5Audio <- data.frame(JAudio_Features, JScore)
 
-ggplot(data = Jeremy_Top_5Audio, aes(x =JAudio_Features, y = JScore, fill = Audio_Features)) +
+ggplot(Jeremy_Top_5Audio, aes(x =JAudio_Features, y = JScore, fill = Audio_Features)) +
   geom_col() +
   labs(title = "Average Audio Features of Jeremy's Top 5 Artists")+
   xlab("Audio_Features") +
