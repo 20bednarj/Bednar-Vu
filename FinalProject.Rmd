@@ -267,6 +267,8 @@ GusAudioFeatures <-
 
 ```
 
+
+#Audio Features
 ```{r eval=FALSE, include=FALSE}
 GusfavArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
 GusfavArtist2 <- get_artist_audio_features(artist= "Erykah Badu")
@@ -281,14 +283,38 @@ GusTop5Audio <-
   full_join(GusfavArtist3)%>%
   full_join(GusfavArtist4)%>%
   full_join(GusfavArtist5)%>%
+  summarise(danceability = sum(danceability)/5,energy = sum(energy)/5, tempo = sum(tempo)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5,instrumentalness = sum(instrumentalness)/5) 
+
+#Make new data frame so we can graph easier
+Audio_Features <- c("danceability", "energy", "tempo", "speechiness", "acousticness", "instrumentalness")
+Score <- c(402.590400, 408.287008, 66377.763800, 158.053660, 91.696080, 6.327396)
+Gus_Top_5Audio <- data.frame(Audio_Features, Score) 
+
+
+#Audio_Features = t(GusTop5Audio)
+#Gus_Top_5Audio <- data.frame(Audio_Features) %>%
+#  group_by(AudioFeatures)
+
+ggplot(data = Gus_Top_5Audio, aes(x =Audio_Features, y = Score, fill = Audio_Features)) +
+  geom_col() +
+  labs(title = "Average Audio Features of Gus' Top 5 Artists")
+
+JeremyfavArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
+JeremyfavArtist2 <- get_artist_audio_features(artist= "Erykah Badu")
+JeremyfavArtist3 <- get_artist_audio_features(artist= "2Pac")
+JeremyfavArtist4 <- get_artist_audio_features(artist= "Lil Wayne")
+JeremyfavArtist5 <- get_artist_audio_features(artist= "Jay-Z")
+
+
+JeremyTop5Audio <-
+  JeremyfavArtist1 %>%
+  full_join(JeremyfavArtist2)%>%
+  full_join(JeremyfavArtist3)%>%
+  full_join(JeremyfavArtist4)%>%
+  full_join(JeremyfavArtist5)%>%
   summarise(danceability = sum(danceability)/5,energy = sum(energy)/5, tempo = sum(tempo)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5,instrumentalness = sum(instrumentalness)/5)
 
-#Transpose and Convert back to data frame so we can graph easier
-Audio_Features = t(GusTop5Audio)
-Gus_Top_5Audio <- data.frame(Audio_Features)
 
-ggplot(data = GusTop5Audio, aes(x = AudioFeatures, fill = color)) +
-  geom_bar()
 
 
 ```
