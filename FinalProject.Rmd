@@ -331,7 +331,7 @@ ggplot(Gus_Top_5Audio, aes(x =Audio_Features, y = Score, fill = Audio_Features))
   geom_col() +
   labs(title = "Average Audio Features of Gus' Top 5 Artists")+
   theme_bw() +
-  ylim(0,500)
+  ylim(0,450)
 
 
 #Make new data frame so we can graph easier
@@ -345,7 +345,7 @@ ggplot(Jeremy_Top_5Audio, aes(x =JAudio_Features, y = JScore, fill = Audio_Featu
   xlab("Audio_Features") +
   ylab("Score") +
   theme_bw() +
-  ylim(0,500)
+  ylim(0,450)
 
 ```
 
