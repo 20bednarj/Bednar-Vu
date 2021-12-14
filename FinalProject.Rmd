@@ -5,7 +5,7 @@ author: "Gus Vu & Jeremy Bednar"
 output: html_notebook
 ---
 
-### Load Libraries & Data
+### Load Libraries & Loading Both Data Sources
 
 ```{r}
 library(jsonlite)
