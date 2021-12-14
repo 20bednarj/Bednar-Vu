@@ -68,7 +68,7 @@ We knew that Spotify collects the data necessary for a project like this because
 
 
 ### Examine the data source
-The data is collected by Spotify. Cases should come in the form of listening instances based on log information. Therefore, the data will show listening time intervals as well as many other variables pertaining to the songs that have been listened to. These variables include but are not limited to...
+The data is collected by Spotify. Cases should come in the form of listening instances based on log information. Therefore, the data will show listening time intervals as well as many other variables pertaining to the songs that have been listened to. The following audio features can be obtained through the Spotify API. These features include but are not limited to...
 acousticness — how acoustic,
 danceability — self-explanatory,
 energy — how 'fast, loud an noisy,
