@@ -6,8 +6,7 @@ output: html_notebook
 ---
 ![](/Users/jeremy/Desktop/spotify banner.png)
 
-### Load Libraries & Loading Both Data Sources
-
+### Libraries & Loading Both Data Sources
 ```{r}
 library(jsonlite)
 library(lubridate)
@@ -56,6 +55,7 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 
 access_token <- get_spotify_access_token()
 ```
+This chunk contains all the data used in this project. "streamHistory" was separated into files 3MB in size, so we joined them into one table (per user). They were also converted from json format to csv format to make it easier to work on in R Studio. Lastly, we included our API access here for organization sake, even though it wasn't used until later in the project.
 
 #### Research Question
 Essentially, we want to recreate Spotify Wrapped in our own way. One question we might ask is, "How much time have I spent listening to music this year?" or, "How has my music taste changed over time?". With our data set, we could answer these questions and many more.
@@ -65,11 +65,11 @@ Essentially, we want to recreate Spotify Wrapped in our own way. One question we
 Link1 <- "https://www.spotify.com/us/account/privacy/"
 Link2 <- "https://towardsdatascience.com/get-your-spotify-streaming-history-with-python-d5a208bbcbd3"
 ```
-We knew that Spotify collects the data necessary for a project like this because of their Spotify Wrapped every year. After some googling, we found out that it can be requested and used personally.
+We knew that Spotify collects the data necessary for a project like this because of their Spotify Wrapped every year. After some researching, we found out that it can be requested and used personally.
 
 
 #### Examine the data source
-The data is collected by Spotify. Cases should come in the form of listening instances based on log information. Therefore, the data will show listening time intervals as well as many other variables pertaining to the songs that have been listened to. The following audio features can be obtained through the Spotify API. These features include but are not limited to...
+The data is collected by Spotify. Cases come in the form of listening instances based on log information. Therefore, the data will show listening time intervals as well as many other variables pertaining to the songs that have been listened to. The following audio features can be obtained through the Spotify API. These features include but are not limited to...
 
 * acousticness — how acoustic 
 * danceability — self-explanatory 
@@ -80,11 +80,13 @@ The data is collected by Spotify. Cases should come in the form of listening ins
 * speechiness — the more spoken words, the higher
 * valence — whether the track sounds happy or sad
 * tempo — the bpm
+
 Spotify created this data for marketing but it is available to users upon request.
 
----------x
+---------
 
 ## Analysis
+From here on out, we worked with the data in each of our "streamHistory" tables, joined the data tables, compared our listening habits, and even made use of Spotify's API. It's easiest to look at each chunk as if it were a mini-project for a better understanding of our process. They all do something unique but accomplish our goals set by the research question. Throughout our analysis, we found that our data and results were slightly different than what Spotify Wrapped told us, which will be explained as you go along.
 
 #### Total Listening Length Per User (in seconds)
 
@@ -101,6 +103,7 @@ streamHistoryTotalGus <-
 streamHistoryTotalGus
 
 ```
+The first thing we did was total our listening time for each of our tables. We noticed that the total was slightly higher than what Wrapped told us. The reason for this discrepancy is that our data was collected for a longer period of time than what was used for our Wrapped. Also, our data includes time listened to an "Unknown Track" or an "Unknown Artist". This is the accumulated listening time for unofficial songs in our respective libraries. In other words, it's the data Spotify collected on tracks that we downloaded and listened to from somewhere other than Spotify. For whatever reason, they don't include this data in their analysis.
 
 #### Listening Length Per User By Song
 
@@ -111,16 +114,21 @@ streamHistoryJeremySong <-
     group_by(trackName, artistName) %>%
     select(artistName, trackName, sPlayed) %>%
     summarize(sTotal = sum(sPlayed)) %>%
-    mutate(Listener = "Jeremy")
+    mutate(Listener = "Jeremy") %>%
+    arrange(desc(sTotal))
+streamHistoryJeremySong
 
 streamHistoryGusSong <- 
     streamHistoryGus %>%
     group_by(trackName, artistName) %>%
     select(artistName, trackName, sPlayed) %>%
     summarize(sTotal = sum(sPlayed)) %>%
-    mutate(Listener = "Gus")
+    mutate(Listener = "Gus") %>%
+    arrange(desc(sTotal))
+streamHistoryGusSong
 
 ```
+This chunk builds off the last. We grouped by the song variable so we could identify our most listened to songs for the given time period. We chose to include the unofficial track data here.
 
 #### Listening Length Per User By Artist
 
@@ -131,16 +139,22 @@ streamHistoryJeremyArtist <-
     group_by(artistName) %>%
     select(artistName, trackName, sPlayed) %>%
     summarize(sTotal = sum(sPlayed)) %>%
-    mutate(Listener = "Jeremy")
+    mutate(Listener = "Jeremy") %>%
+    arrange(desc(sTotal))
+streamHistoryJeremyArtist
+    
 
 streamHistoryGusArtist <- 
     streamHistoryGus %>%
     group_by(artistName) %>%
     select(artistName, trackName, sPlayed) %>%
     summarize(sTotal = sum(sPlayed)) %>%
-    mutate(Listener = "Gus")
+    mutate(Listener = "Gus") %>%
+    arrange(desc(sTotal))
+streamHistoryGusArtist
 
 ```
+This chunk is identical to the last, but we changed the group by variable from song to artist.
 
 #### Gus and Jeremy Full Join (streamHistory, Song, and Artist)
 
@@ -166,8 +180,12 @@ streamHistoryGusAndJeremyArtist <-
 streamHistoryGusAndJeremySong %>%
   head(10)
 
+streamHistoryGusAndJeremyArtist %>%
+  head(10)
+
 
 ```
+In this chunk, we joined all of the tables made in the previous chunks so we could compare our data for songs and artists. It also serves as a good indication of our listening habits. For instance, we can see that Jeremy listens to significantly more music than Gus, and he binge listens to both songs and artists more than Gus.
 
 #### Top 10 Songs
 
@@ -205,6 +223,7 @@ ggplot(JeremyTopTenSong) +
   xlab("Track Name") +
   ylab("Total Listened (Seconds)")
 ```
+This graphic compares the top 10 most listened to songs for each of us in descending order. It acts as a good visual representation of our analysis, much like how Spotify does it. We decided to omit the data collected for unofficial tracks because the song objects don't have a unique identifier to collect information on. Although there are many different unofficial tracks that we both listen to, Spotify can't collect information on them individually, therefore causing it to be unfit for comparison.
 
 #### Top 10 Artists
 ```{r}
@@ -240,6 +259,7 @@ ggplot(JeremyTopTenArtist) +
   ylab("Total Listened (Seconds)")
 
 ```
+This is the same visual representation as the last, but for artists rather than songs.
 
 #### Initial CoPlaylist
 
@@ -251,6 +271,7 @@ CoPlaylist <-
   inner_join(streamHistoryGusSong, by = c("trackName" = "trackName","artistName" = "artistName")) 
 CoPlaylist
 ```
+Our goal in mind with this chunk was to find songs that we both listened to a reasonable number of times so we could create a playlist that caters to both respective music tastes.
 
 #### Top 10 Songs On CoPlaylist
 
@@ -288,7 +309,7 @@ ggplot(JeremyCoPlay) +
   theme_bw()
 
 ```
-
+This graphic shows us which songs were each of our favorites from the CoPlaylist.
 
 ## Audio Features
 ```{r}
@@ -305,6 +326,7 @@ GusTop5Audio <-
   full_join(GusfavArtist4)%>%
   full_join(GusfavArtist5)%>%
   summarise(danceability = sum(danceability)/5,energy = sum(energy)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5, instrumentalness = sum(instrumentalness)/5) 
+Gus_Top_5Audio
 
 
 #Find the average score of audio features for top 5 artists
@@ -320,9 +342,10 @@ JeremyTop5Audio <-
   full_join(JeremyfavArtist4)%>%
   full_join(JeremyfavArtist5)%>%
   summarise(danceability = sum(danceability)/5,energy = sum(energy)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5, instrumentalness = sum(instrumentalness)/5)
+JeremyTop5Audio
 
 ```
-
+This is our attempt at taking advantage of Spotify's API. We found that some really useful information could be attached to each song in our library, but that it took significantly longer to do this than what we had initially imagined. We wanted to do this for all songs and all artists to have an accurate representation of our music taste, but we found that to be outside the scope of this project. Instead, we did it for our top 5 artists, so we still had something to work with.
 
 #### Graphing & Comparing Audio Features
 ```{r}
@@ -352,6 +375,11 @@ ggplot(Jeremy_Top_5Audio, aes(x =JAudio_Features, y = JScore, fill = Audio_Featu
   ylim(0,450)
 
 ```
+Finally, we compared our music tastes by graphing the audio features for our top 5 artists. Generally, the music that Gus listens to is much more dancable and energetic than what Jeremy listens to. Neither of us listen to much acoustic music based on this measure.
 
+-------
+
+## Final Thoughts
+All in all, this project was very constructive for the both of us for many reasons. Luckily, we got to work on something we are both passionate about and it certainly motivated us to make it into something we'd be happy with. We didn't accomplish everything we had initially wanted to, but we definitely did enough to be satisfied with the final product.
 
 
