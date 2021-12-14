@@ -288,13 +288,12 @@ ggplot(JeremyCoPlay) +
 
 #Audio Features
 ```{r}
+#Find the average score of audio features for top 5 artists
 GusfavArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
 GusfavArtist2 <- get_artist_audio_features(artist= "Erykah Badu")
 GusfavArtist3 <- get_artist_audio_features(artist= "2Pac")
 GusfavArtist4 <- get_artist_audio_features(artist= "Lil Wayne")
 GusfavArtist5 <- get_artist_audio_features(artist= "Jay-Z")
-
-
 GusTop5Audio <-
   GusfavArtist1 %>%
   full_join(GusfavArtist2)%>%
@@ -304,14 +303,12 @@ GusTop5Audio <-
   summarise(danceability = sum(danceability)/5,energy = sum(energy)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5, instrumentalness = sum(instrumentalness)/5) 
 
 
-
+#Find the average score of audio features for top 5 artists
 JeremyfavArtist1 <- get_artist_audio_features(artist= "Lil Uzi Vert")
 JeremyfavArtist2 <- get_artist_audio_features(artist= "Tyler, The Creator")
 JeremyfavArtist3 <- get_artist_audio_features(artist= "Future")
 JeremyfavArtist4 <- get_artist_audio_features(artist= "Juice WRLD")
 JeremyfavArtist5 <- get_artist_audio_features(artist= "Playboi Carti")
-
-
 JeremyTop5Audio <-
   JeremyfavArtist1 %>%
   full_join(JeremyfavArtist2)%>%
@@ -319,9 +316,6 @@ JeremyTop5Audio <-
   full_join(JeremyfavArtist4)%>%
   full_join(JeremyfavArtist5)%>%
   summarise(danceability = sum(danceability)/5,energy = sum(energy)/5,speechiness = sum(speechiness)/5,acousticness = sum(acousticness)/5, instrumentalness = sum(instrumentalness)/5)
-
-
-
 
 ```
 
@@ -332,7 +326,6 @@ JeremyTop5Audio <-
 Audio_Features <- c("danceability", "energy", "speechiness", "acousticness", "instrumentalness")
 Score <- c(402.590400, 408.287008, 158.053660, 91.696080, 6.327396)
 Gus_Top_5Audio <- data.frame(Audio_Features, Score) 
-
 
 ggplot(Gus_Top_5Audio, aes(x =Audio_Features, y = Score, fill = Audio_Features)) +
   geom_col() +
