@@ -62,7 +62,7 @@ Essentially, we want to recreate Spotify Wrapped in our own way. One question we
 ### Where/How Data was Found
 ```{r}
 Link1 <- "https://www.spotify.com/us/account/privacy/"
-Link2 <- "https://towardsdatascience.com/get-your-spotify-streaming-history-with-python-d5a208bbcbd3"
+Link2 <- "https://towardsdatascience.com/get-your-spotify-streaming-histo ry-with-python-d5a208bbcbd3"
 ```
 We knew that Spotify collects the data necessary for a project like this because of their Spotify Wrapped every year. After some googling, we found out that it can be requested and used personally.
 
