@@ -42,12 +42,14 @@ streamHistoryJeremy <-
   full_join(streamHistoryJeremy4) %>%
   mutate(Listener = "Jeremy") %>%
   mutate(sPlayed = msPlayed/1000)
+streamHistoryJeremy
 
 streamHistoryGus <-
   streamHistoryGus0 %>%
   full_join(streamHistoryGus1) %>%
   mutate(Listener = "Gus") %>%
   mutate(sPlayed = msPlayed/1000)
+streamHistoryGus
 
 #API Access (Gus)
 Sys.setenv(SPOTIFY_CLIENT_ID = '949891eb08fe47cb8e6e031a841b76ba')
