@@ -7,7 +7,7 @@ output: html_notebook
 
 ### Load Libraries & Data
 
-```{r include=FALSE}
+```{r}
 library(jsonlite)
 library(lubridate)
 library(gghighlight)
@@ -55,6 +55,8 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 
 access_token <- get_spotify_access_token()
 ```
+
+## Analysis
 
 ### Total Listening Length Per User (in seconds)
 
