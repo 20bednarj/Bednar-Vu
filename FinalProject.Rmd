@@ -4,6 +4,7 @@ due date: "12/14/2021"
 author: "Gus Vu & Jeremy Bednar"
 output: html_notebook
 ---
+![](/Users/jeremy/Desktop/spotify banner.png)
 
 ### Load Libraries & Loading Both Data Sources
 
@@ -56,10 +57,10 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 access_token <- get_spotify_access_token()
 ```
 
-### Research Question
+#### Research Question
 Essentially, we want to recreate Spotify Wrapped in our own way. One question we might ask is, "How much time have I spent listening to music this year?" or, "How has my music taste changed over time?". With our data set, we could answer these questions and many more.
 
-### Where/How Data was Found
+#### Where/How Data was Found
 ```{r}
 Link1 <- "https://www.spotify.com/us/account/privacy/"
 Link2 <- "https://towardsdatascience.com/get-your-spotify-streaming-history-with-python-d5a208bbcbd3"
@@ -67,22 +68,25 @@ Link2 <- "https://towardsdatascience.com/get-your-spotify-streaming-history-with
 We knew that Spotify collects the data necessary for a project like this because of their Spotify Wrapped every year. After some googling, we found out that it can be requested and used personally.
 
 
-### Examine the data source
+#### Examine the data source
 The data is collected by Spotify. Cases should come in the form of listening instances based on log information. Therefore, the data will show listening time intervals as well as many other variables pertaining to the songs that have been listened to. The following audio features can be obtained through the Spotify API. These features include but are not limited to...
-acousticness — how acoustic,
-danceability — self-explanatory,
-energy — how 'fast, loud an noisy,
-instrumentalness — the less vocals, the higher,
-liveness — whether there is audience in the recording,
-loudness — self-explanatory,
-speechiness — the more spoken words, the higher,
-valence — whether the track sounds happy or sad, and
-tempo — the bpm.
+
+* acousticness — how acoustic 
+* danceability — self-explanatory 
+* energy — how 'fast, loud an noisy
+* instrumentalness — the less vocals, the higher
+* liveness — whether there is audience in the recording
+* loudness — self-explanatory
+* speechiness — the more spoken words, the higher
+* valence — whether the track sounds happy or sad
+* tempo — the bpm
 Spotify created this data for marketing but it is available to users upon request.
+
+---------x
 
 ## Analysis
 
-### Total Listening Length Per User (in seconds)
+#### Total Listening Length Per User (in seconds)
 
 ```{r}
 #Total listening time of the time interval for which the data was collected (including "banned artists")
@@ -98,7 +102,7 @@ streamHistoryTotalGus
 
 ```
 
-### Listening Length Per User By Song
+#### Listening Length Per User By Song
 
 ```{r}
 #total listening time per song
@@ -118,7 +122,7 @@ streamHistoryGusSong <-
 
 ```
 
-### Listening Length Per User By Artist
+#### Listening Length Per User By Artist
 
 ```{r}
 #total listening time for all artists
@@ -138,7 +142,7 @@ streamHistoryGusArtist <-
 
 ```
 
-### Gus and Jeremy Full Join (streamHistory, Song, and Artist)
+#### Gus and Jeremy Full Join (streamHistory, Song, and Artist)
 
 ```{r}
 #combining the original streamHistory tables for Gus & Jeremy
@@ -165,7 +169,7 @@ streamHistoryGusAndJeremySong %>%
 
 ```
 
-### Top 10 Songs
+#### Top 10 Songs
 
 ```{r}
 
@@ -202,7 +206,7 @@ ggplot(JeremyTopTenSong) +
   ylab("Total Listened (Seconds)")
 ```
 
-### Top 10 Artists
+#### Top 10 Artists
 ```{r}
 #graphs and visuals for significant information
 GusTopTenArtist <-
@@ -237,7 +241,7 @@ ggplot(JeremyTopTenArtist) +
 
 ```
 
-### Initial CoPlaylist
+#### Initial CoPlaylist
 
 ```{r}
 #creating a playlist of songs that both users listen to
@@ -248,7 +252,7 @@ CoPlaylist <-
 CoPlaylist
 ```
 
-### Top 10 Songs On CoPlaylist
+#### Top 10 Songs On CoPlaylist
 
 ```{r}
 #songs each of us listen to a lot that the other has heard before
@@ -286,7 +290,7 @@ ggplot(JeremyCoPlay) +
 ```
 
 
-#Audio Features
+## Audio Features
 ```{r}
 #Find the average score of audio features for top 5 artists
 GusfavArtist1 <- get_artist_audio_features(artist= "Ms. Lauryn Hill")
@@ -320,7 +324,7 @@ JeremyTop5Audio <-
 ```
 
 
-
+#### Graphing & Comparing Audio Features
 ```{r}
 #Make new data frame so we can graph easier
 Audio_Features <- c("danceability", "energy", "speechiness", "acousticness", "instrumentalness")
