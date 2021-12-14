@@ -56,6 +56,30 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '54b9813cd7bc40eca15514be0b52701b')
 access_token <- get_spotify_access_token()
 ```
 
+### Research Question
+Essentially, we want to recreate Spotify Wrapped in our own way. One question we might ask is, "How much time have I spent listening to music this year?" or, "How has my music taste changed over time?". With our data set, we could answer these questions and many more.
+
+### Where/How Data was Found
+```{r}
+Link1 <- "https://www.spotify.com/us/account/privacy/"
+Link2 <- "https://towardsdatascience.com/get-your-spotify-streaming-history-with-python-d5a208bbcbd3"
+```
+We knew that Spotify collects the data necessary for a project like this because of their Spotify Wrapped every year. After some googling, we found out that it can be requested and used personally.
+
+
+### Examine the data source
+The data is collected by Spotify. Cases should come in the form of listening instances based on log information. Therefore, the data will show listening time intervals as well as many other variables pertaining to the songs that have been listened to. These variables include but are not limited to...
+acousticness — how acoustic,
+danceability — self-explanatory,
+energy — how 'fast, loud an noisy,
+instrumentalness — the less vocals, the higher,
+liveness — whether there is audience in the recording,
+loudness — self-explanatory,
+speechiness — the more spoken words, the higher,
+valence — whether the track sounds happy or sad, and
+tempo — the bpm.
+Spotify created this data for marketing but it is available to users upon request.
+
 ## Analysis
 
 ### Total Listening Length Per User (in seconds)
